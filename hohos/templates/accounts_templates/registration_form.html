@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+<!-- {% block style %}
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js" type="text/javascript"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.18/jquery-ui.js" type="text/javascript"></script>
+  <script> 
+  $( function() {
+    $( "#id_birthday" ).datepicker();
+  } );
+  </script>
+
+{% endblock %} -->
+{% block body_scripts %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+   <script>
+  $( function() {
+    $( "#id_birthday" ).datepicker();
+  } );
+  </script>
+
+{% endblock %} 
+
+
+{% block content %}
+<!-- <div class="row" style="margin-top: 70px;">
+	<div class="col-sm-6 col-sm-offset-3">
+	<form method="POST" action="">
+		{% csrf_token %}
+		<h2 class="lead">Join to Shre your styles!</h2>
+		{{ form|crispy }}		
+		<input class="btn btn-info" type="submit" name="SignUp" value="SignUp">
+	</form>
+	</div>	
+</div> -->
+
+<div class="col-sm-6 col-sm-offset-3" style="margin-top: 80px">
+<form action="." method="post">
+<p class="lead" >Join to share your style!</p>
+
+{% csrf_token %}
+{% if form.errors %}<p>Please correct the following fields:</p>{% endif %}
+<div class="register_div">
+        {% if form.username.errors %}<p class="error">{{ form.username.errors }}</p>{% endif %}
+        <p><label for="username"{% if form.username.errors %} class="error"{% endif %}>Username:</label></p>
+        <p>{{ form.username }}</p>
+</div>
+<div class="register_div">
+        {% if form.email.errors %}<p class="error">{{ form.email.errors }}</p>{% endif %}
+        <p><label for="email"{% if form.email.errors %} class="error"{% endif %}>Email:</label></p>
+        <p>{{ form.email }}</p>
+</div>
+<div class="register_div">
+        {% if form.password.errors %}<p class="error">{{ form.password.errors }}</p>{% endif %}
+        <p><label for="password"{% if form.password.errors %} class="error"{% endif %}>Password:</label></p>
+        <p>{{ form.password }}</p>
+</div>
+<div class="register_div">
+        {% if form.password1.errors %}<p class="error">{{ form.password1.errors }}</p>{% endif %}
+        <p><label for="password1"{% if form.password1.errors %} class="error"{% endif %}>Verify Password:</label></p>
+        <p>{{ form.password1 }}</p>
+</div>
+<div class="register_div">
+        {% if form.birthday.errors %}<p class="error">{{ form.birthday.errors }}</p>{% endif %}
+        <p><label for="birthday"{% if form.birthday.errors %} class="error"{% endif %}>Birthday:</label></p>
+        <p>{{ form.birthday }}</p>
+</div>
+<div class="register_div">
+        {% if form.name.errors %}<p class="error">{{ form.name.errors }}</p>{% endif %}
+        <p><label for="name"{% if form.name.errors %} class="error"{% endif %}>Name:</label></p>
+        <p>{{ form.name }}</p>
+</div>
+<p><input class="btn btn-info" type="submit" alt="register" /></p>
+</form>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+<footer>
+<div class="container-fluid" style='padding: 10px; margin-top: 70px; height: 50px; background-color: #008080;'>
+<p style="text-align:center;"><a href="#" target="blank" style="color: black;">Contact</a> | <a href="#" target="blank" style="color: black;">LinkedIn</a> | <a href="#" target="blank" style="color: black;">Twitter</a> | <a href="#" target="blank" style="color: black;">Google+</a> | <a href="" style="color: black;">Hohos</a>
+</p>
+</div>
+</footer>
+
+ {% endblock %}

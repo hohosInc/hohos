@@ -1,0 +1,158 @@
+ {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load urlify %}
+
+
+{% block head %} {{instance.title}} | {{ block.super }} {% endblock %}
+
+ <style>
+ {% block style %}
+.comment-reply{
+    display:none;
+}   
+{% endblock %} -->
+</style>
+<!-- 
+<script type="text/javascript">
+    
+$(document).ready(function() {   
+    $('.post-likes').click(function() {
+        var id;
+        id = $(this).attr('data-post-id');
+        $.get('/like-blog/', {
+            post_id: id
+        }, function(data) {
+            $('.like_count_blog').html(data);
+        });
+    });
+});
+    
+</script> -->
+
+
+
+{% block content %}
+
+<div class="row" style="margin-top: 80px;">
+	
+<div class="col-sm-6 col-sm-offset-3">
+<h1>{{instance.title }} <small>{{instance.time_stamp|timesince}} ago</small></h1> 
+<p>updated on {{instance.updated}}</p>
+<br>
+{% if instance.my_new_style %}
+<img src="{{instance.my_new_style.url}}" class="img-responsive">
+{% endif %}
+
+        <p>
+        <a href="#" class="btn btn-primary" style="margin-top: 10px;">Likes {{obj.likes}}</a>
+
+<!-- 
+<div class="heart-particle-box">
+   <button class="likes post-likes" id="heart-icon" data-post-id="{{ instance.id }}">
+   {% if liked %}
+   <i class="heart-shaped fa fa-heart" style="display: line-block"></i>
+   <i class="heart-shaped fa fa-heart-o" style="display: none"></i>
+   {% else %}
+   <i class="heart-shaped fa fa-heart" style="display: none"></i>
+   <i class="heart-shaped fa fa-heart-o" style="display: line-block"></i>
+   {% endif %}
+   </button>
+   <div class="like_count_blog" id="heart-counter">{{ instance.likes }}</div>
+</div>
+ -->
+<!-- 
+        <a href="#" class="btn btn-success" role="button" style="margin-top: 10px;">Its my way</a>
+        <a href="{% url 'posts:update' slug=instance.slug %}" class="btn btn-warning" role="button" style="margin-top: 10px;">Edit</a> -->
+           <!-- /posts/{{instance.slug}}/edit/ -->
+        	<!-- {{obj.id}}/edit/ -->
+
+<a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+          Facebook
+</a>
+
+
+<a href="https://twitter.com/home?status={{share_string}}%20{{request.build_absolute_uri}}">
+Twitter
+</a>
+
+<a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{instance.title}}&summary={{share_string}}&source={{request.build_absolute_uri}}">
+Linkedin
+</a>
+
+        </p>
+<!--            <br> -->
+<!-- {{instance.content|urlify}} -->
+
+
+
+
+<div class='row'>
+<div class='col-sm-12 '>
+
+<!--    <div class='post-detail-item'>{{ instance.get_markdown }}</div> -->
+
+    <hr/>
+<!--     <br/> -->
+
+    <div>
+
+        <p class='lead'>Comments</p>
+        {% if request.user.is_authenticated %}
+        <form method="post" action="" enctype="multipart/form-data"> {% csrf_token %}
+            {{ comment_form|crispy }}
+            <input type='submit' value='mYstyle' class='btn btn-default'>
+        </form>
+        {% else %}
+        <p>You must login to comment </p>
+        {% endif %}
+        <hr/>
+        {% for comment in comments %}
+
+        <blockquote>
+          <p>{{ comment.content }}</p>
+          <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class='comment-reply-btn' href='#'>Reply</a> | <a class='' href='{{ comment.get_absolute_url }}'>Thread</a></footer>
+          <div class='comment-reply'>
+              {% for child_comment in comment.children %}
+                <blockquote>
+                <p>{{ child_comment.content }}</p>
+                <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
+                </blockquote>
+             {% endfor %}
+             {% if request.user.is_authenticated %}
+
+            <form method="POST" action="" "> {% csrf_token %}
+                {{ comment_form|crispy }}
+                <input type='hidden' name='parent_id' value='{{ comment.id }}'>
+                <input type='submit' value='Reply' class='btn btn-default'>
+            </form>
+            {% else %}
+        <p>You must login to comment </p>
+        {% endif %}
+        </div>
+
+        </blockquote>
+
+        <hr/>
+        {% endfor %}
+    </div>
+
+
+
+
+</div>
+</div>
+
+<!-- {{instance.content|linebreaks}}  -->	
+</div>
+
+</div>
+
+
+ 
+
+{% endblock %}
+
+
+
+
+

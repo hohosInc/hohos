@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+<div class="row" style="margin-top: 80px;">
+ <div class="col-sm-6 col-sm-offset-3">
+{% if request %}
+	<h1>Edit Your Post</h1>
+	<form method="post" action="">
+	{% csrf_token %}
+	{{ form|crispy }}
+	<input type="submit" name="edit">
+</form>
+
+ </div>
+</div>
+
+{% else %}
+{{title}}
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %} 
+
+{% if request %}
+
+<div class="row" style="margin-top: 80px;">
+  <div class="col-sm-6 col-sm-offset-3">
+
+<h1>Create Post</h1>
+
+<form method="post" action="" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form|crispy }}
+
+<input type="submit" class="btn btn-primary" name="create_post">
+</form>
+
+</div>
+</div>
+
+{% else %}
+
+{{title}}
+
+{% endif %}
+
+{% endblock %}

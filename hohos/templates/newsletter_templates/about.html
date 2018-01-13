@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} 
+{% load staticfiles %}
+
+<style>
+{% block style %}
+
+/*.container {
+	position: relative;
+	margin-top: 50px;
+}*/
+
+{% endblock %}
+</style>
+
+
+
+{% block content %}
+
+<div class="row" style="margin-top: 80px;">
+
+	<div class="col-xs-4">
+		<img src="{% static 'img/logo_new.jpg' %}" class="img-responsive">
+	</div>
+	<div class="col-xs-8 pull-right">
+	<button class="btn btn-lg btn-info" style="margin-bottom: 20px">Who are We!</button>
+	<p style="color:#008080; font-size: 17px;">
+		Hi there!
+		We are here at Hohos trying to make you guys have some amazing stuff.
+		We are trying to make something out of nothing!
+		Actually We are kind of trying to connect people on the basis of the way they do things.
+		
+	</p>		
+	<p style="font-size: 17px;">
+		If you are interested in what we are trying to do, Let us know!
+		You might come and join us to make this stuff more cool and amazing adding your experience.
+		
+	</p>
+	</div>
+</div>
+
+	<br><br>
+
+	<div class="row" >
+
+	<div class='col-sm-4 pull-right'>
+	<br><br>
+  	<img src="{% static 'img/deepak.jpg' %}" class="img-responsive img-circle" style="height: 300px; margin-right: 0" >
+	</div>
+
+	<div class="col-sm-8">
+	<br><br>
+    <p style="color:#008080; font-size: 17px;">
+    	<span style="color: red">Deepak Bharti</span><br>
+    	<span style="color: red">-Founder &amp; CEO Hohos</span><br>
+    	Deepak is currently in B.tech 2nd Year in Computer Science
+    	at Motilal Nehru National Institute of Technology.
+    	He strongly wish that the People should get the best of available.
+        If you happen to have a glimpse of Education sector its quite opposite there,
+        i.e more than 50% students are not getting what they should be.
+        He realized this during my Higher Secondary and then he decided to correct it.
+        And now He is on the way...
+        He is currently working on something to fix this.Meanwhile The team hohos had an idea
+         to make you guys have fun, Hence Hohos is launched. The whole project took 10-15 days,, Cool
+        You can visit Deepak Bharti at www.about.me/deepak_bharti.
+    </p>
+	</div>
+	</div>
+
+
+
+<div class="row" style="margin-top: 100px;" >
+
+<div class="col-sm-6" style="margin-top: 100px">
+<!-- 	<img src="{% static 'img/pic10.jpg' %}" class="img-responsive img-circle"> -->
+   <p style="color:#008080; font-size: 17px;">
+   As mentioned on Home page We are working on another big project, Which we beleive is something,
+   gonna change the way Colleges,Schools and Coaching institues in India and around the world work.
+   We beleive these assets to be keys to bring the big changes in the society. So We are very eager 
+   to present it to College, School and Coaching guys as you are the prominent part of the system , 
+   We beleive.
+    </p>
+</div>
+
+
+	<div class='col-sm-6 pull-right'>	
+	{% if title1 %}
+	<button class="btn btn-success btn-lg btn-block" style="margin-bottom: 30px">{{title1}}</button> 
+	{% else %}
+	<h1>Thanks! </h1>
+	<h1 style="font-size: 17px"> {{title2}} </h1>
+	{% endif %}
+
+	<br>
+	<form method="POST" action=".">
+		{% csrf_token %}
+		{{ form|crispy }}
+		<input type="submit" class='btn btn-primary' value="Apply to join Hohos!">
+	</form>
+
+	</div>
+</div>
+{% endblock %}
+
+
+
+{% block footer %}
+<footer>
+<div class="container-fluid" style='padding: 10px; margin-top: 70px; height: 50px; background-color: #008080;'>
+<p style="text-align:center;"><a href="#" target="blank" style="color: black;">Contact</a> | <a href="#" target="blank" style="color: black;">LinkedIn</a> | <a href="#" target="blank" style="color: black;">Twitter</a> | <a href="#" target="blank" style="color: black;">Google+</a> | <a href="" style="color: black;">Hohos</a>
+</p>
+</div>
+</footer>
+
+ {% endblock %}

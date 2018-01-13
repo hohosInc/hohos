@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{%  block title %} Welcom | {{block.super}} {% endblock %}
+
+<style>
+{% block style %}
+/*.navbar-fixed-top {
+  margin-bottom: 0px !important;
+  background-color: #008080;
+}*/
+.jumbotron {
+  position: relative;
+  background-color:#008080;
+  margin-top: 30px;
+}
+
+{% endblock %}
+</style>
+
+
+{% block jumbotron %}
+
+      <!-- Main component for a primary marketing message or call to action -->
+<div class="jumbotron">       <!-- jumbotron is that coloured backgroud -->
+  <div class="container">
+  <div class="row">
+      <div class="col-md-6 ">
+        <h1>What's Up!</h1>
+    <p class="lead" style="color: white;">Hey There Here we are trying to collect the different versions of the things we daily do, <br />
+    May be its of some benefit, but I'd made it for fun purposes..<br />Hope You enjoy at Hohos!
+    </p>
+          <a class="btn btn-lg btn-primary" href="{% url 'posts:list' %}" role="button">Show your flavour! &raquo;</a>
+        </p>
+       </div>
+
+    <div class="col-md-6 ">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/6ySAZ3ChfrQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>  
+  </div>  
+  </div> 
+
+{% endblock %}
+
+
+
+{% block content %}
+
+{% if queryset %}
+
+<h1>Welcome {{request.user}}!</h1>
+<h2>You are logged in as a staff user, So you are seeing this stuff...</h2>
+<h2>Here's the list of all the registered users :- </h2>
+
+<!-- {{ queryset }} -->
+
+<table class="table">
+{% for instance in queryset %}
+  <tr>
+     <td>{{ forloop.counter }}.</td>
+     <td>{{instance.full_name}}</td> 
+     <td>{{instance.email}}</td>
+     <td>{{instance.time_stamp}} ago</td>
+  </tr>
+
+{% endfor %}
+</table>
+
+
+{% else %}
+
+<div class="row">
+
+  <div class="col-sm-3 pull-right">
+<!--   if u do col-xs-3 it'll always be of 3 width however is resized -->
+<p class='lead text-align-center' >{{title}}</p>
+<br><br>
+<a href="" class="btn btn-warning btn-block">Todays Most Featured Styles!</a>
+<a href="" class="btn btn-info btn-block">Styles in air yesterday!</a>
+<a href="{% url 'posts:list' %}" class="btn btn-primary btn-block">Share Your own Styles!</a>
+<a href="#" class="btn btn-success btn-block">Come And Join Us!</a>
+  </div>  
+
+<div>
+<!--  <div class='col-xs-3'>
+  <p class='lead text-align-center'> Share.. </p>
+ </div>
+ <div class='col-xs-3'>
+  <p class='lead text-align-center'> Have fun.. </p>
+ </div> -->
+
+<div class='col-xs-6'>
+<p style="text-align: center;" class="lead" class="text-align-center"> come join &amp; show your flavour! </p>
+  <img src="http://www-static.se-mc.com/blogs.dir/4/files/2014/07/xperia-c3-sonymobile-940x528-a0a95bbf22a444bc9411921bc77c1df9.jpg" height="300px" class="img-responsive">
+
+</div>
+</div>
+
+ <div class='col-xs-3' class="clearfix visible-xs-block">
+  <p class='lead text-align-center'> Ready to show!</p>
+  <span style="align-items: center;" class="fa-stack fa-lg fa-5x">
+<!--     <i class="fa fa-spinner fa-stack-2x fa-spin" aria-hidden="true"></i> -->
+  <i style="color: lightblue" class='fa fa-circle-o-notch fa-stack-2x fa-spin'></i>
+  <i style="color: pink" class="fa fa-github fa-stack-1x"></i>
+
+  </span>
+ </div>
+</div>
+
+
+
+<div class="row" style="margin-top: 20px; font-size: 20px;">
+  <div class='col-xs-6'>
+  <br><br><br>
+  <a href="" class="btn btn-warning btn-block">Todays Most Featured Styles!</a>
+  <a href="" class="btn btn-info btn-block">Styles in air yesterday!</a>
+  <a href="" class="btn btn-primary btn-block">Share Your own Styles!</a>
+  <a href="" class="btn btn-success btn-block">Come And Join Us!</a>
+  </div>
+  <div class="col-sm-6 pull-right">
+  <br>
+  <img src="{% static 'img/pic15.png' %}" class="img-responsive" height="300px">
+  </div>
+</div>
+
+
+<div class="row" style="margin-top: 20px; font-size: 20px;">
+  <div class='col-xs-6'>
+  <br>
+  <img src="{% static 'img/pic4.jpg' %}" class="img-responsive" height="300px">
+  </div>
+  <div class="col-sm-6 pull-right">
+  <br><br><br>
+  <a href="" class="btn btn-warning btn-block">Todays Most Featured Styles!</a>
+  <a href="" class="btn btn-info btn-block">Styles in air yesterday!</a>
+  <a href="" class="btn btn-primary btn-block">Share Your own Styles!</a>
+  <a href="" class="btn btn-success btn-block">Come And Join Us!</a>
+  </div>
+</div>
+
+
+
+<div class="row" style="margin-top: 20px; font-size: 20px;">
+  <div class="col-sm-6">
+<!--   <button class="btn btn-warning btn-lg btn-block" style="margin-top: 100px">
+    We are working on something big!<br>
+    Meanwhile, An Idea appeared in our head
+    and We at Hohos are presenting it to you...<br>
+   Its basicaly a way to share your pictures and
+   see how others do that.
+  </button> -->
+  <br><br><br>
+  <a href="" class="btn btn-warning btn-block">Todays Most Featured Styles!</a>
+  <a href="" class="btn btn-info btn-block">Styles in air yesterday!</a>
+  <a href="" class="btn btn-primary btn-block">Share Your own Styles!</a>
+  <a href="" class="btn btn-success btn-block">Come And Join Us!</a>
+
+  </div>
+  <br>
+  <div class="col-sm-6">
+    <img src="{% static 'img/pic1.jpg' %}" class="img-responsive" height="300px">
+  </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+
+ {% block footer %}
+
+<footer>
+<div class="container-fluid" style='padding: 10px; margin-top: 70px; height: 50px; background-color: #008080;'>
+<p style="text-align:center;"><a href="{% url 'contact' %}" target="blank" style="color: black;">Contact</a> | <a href="#" target="blank" style="color: black;">LinkedIn</a> | <a href="#" target="blank" style="color: black;">Twitter</a> | <a href="#" target="blank" style="color: black;">Google+</a> | <a href="" style="color: black;">Hohos</a>
+</p>
+</div>
+</footer>
+
+ {% endblock %}
+
+
+<!-- We are working on something big!
+Meanwhile, An Idea appeared in our head
+and We at Hohos are presenting it to you...
+   Its basicaly a way to share your pictures and
+   see how others do that. -->
+
+
+
+
+
+<!-- Removed join form below jumbotron -->
+<!--    <form action="." method="POST" >
+{%  csrf_token %}
+{{ form|crispy }}
+
+  <input type="submit" class='btn btn-primary' value="SignUp!">
+
+</form> -->
