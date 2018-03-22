@@ -1,7 +1,6 @@
 data.json
 data_new.json
 *.pyc
-*.db
-media_root
-media
+django_project/django_project/media_root
+django_project/
 .Trash*
