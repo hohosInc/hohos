@@ -1,2 +1,7 @@
 data.json
 data_new.json
+*.pyc
+*.db
+media_root
+media
+

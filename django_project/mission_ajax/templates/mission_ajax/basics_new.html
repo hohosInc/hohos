@@ -1,0 +1,327 @@
+{% load staticfiles %}
+
+{% block title %} Mission Jquery-Ajax {% endblock %}
+
+{% block style %}
+<style>
+ 
+.simple {
+  background-color: brown;
+  color: black; 
+} 
+
+.stylish { 
+  background-color: brown;
+  color: black;
+}
+span { width:60px; height:60px; margin:5px; float:left; }
+
+</style>
+{% endblock %}   
+
+{% block body %}
+
+<div style="margin-top: 80px;">
+ 
+<h2 style="text-align: center;">Mission-Ajax.. Hurrah!</h2>
+<p class="pull-right"><a href="{% url 'ajax:effects' %}">|Ajax-Effects|</a></p>
+<p class="pull-right"><a href="{% url 'ajax:interactions' %}">|Ajax-interactions|</a></p>
+<p class="pull-right"><a href="{% url 'ajax:widgets' %}">|Ajax-widgets|</a></p>
+<p class="pull-right"><a href="{% url 'ajax:test' %}">|Ajax-widgets|</a></p>
+
+<em title="bold and brave.">This is em tags text.</em>
+<div id="div1">Its second division.</div>
+<div id="div2"></div>
+<div id="div4">Its div 4</div>
+<div id="div3">Its div 3</div> 
+<img  src="" alt="Sample image">
+
+<p>Its a romntic para</p>
+<p>Its a romntic para</p>
+<p>Its a romntic para</p>
+
+      <p>Click on any square:</p>
+      <p id = "result"> </p>
+    
+      <span style = "background-color:blue;"></span>
+      <span style = "background-color:rgb(15,99,30);"></span>
+      <span style = "background-color:#123456;"></span>
+      <span style = "background-color:#f11;"></span>
+
+</div>
+{% endblock %}
+
+
+{% block js %}
+
+<script type = "text/javascript" src = "{% static 'jquery/jquery.min.js' %}"></script>
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+ 
+  var title = $("em").attr("title");
+  $('#div2').text(title);  // this will put the title value as the test in this tag
+  $('#div1').css('background-color','green'); // adding css to some tags
+  $('#div1').css('background-color');
+  // $('img').attr('src','https://www.tutorialspoint.com/jquery/images/jquery.jpg'); // correcting the img src of src attribute of                                          // any image
+  $('#div3').addClass('simple');  // this adds class simple to the div with id3
+  $('#div4').addClass('stylish');  // same as above
+  $('img').attr('src');  // gives the value of css attribute background-color
+  $('p').text();
+
+  $('span').click(function(){
+
+    var color = $(this).css('background-color');
+    $('#result').html('This span is <span style="color:'+ color+';">' +color+ '</span>.');
+  });
+});
+
+
+$(document).ready(function(){
+  $('p').eq(2).addClass('stylish');
+
+  $(document).bind('click',function(e){    //this binds a click function to document for the p tags such that on 
+                        // on clicking on any para stylish class adds to it and removed if clicked  again
+    $(e.target).closest('p').toggleClass('stylish');
+
+  });
+});
+</script>
+
+{% endblock %}
+
+----------------------------------------+++++++++++++++++++++++++++++++++++++-----------------------------------------------------
+
+
+Key points  == the following does not affect the current page as this is out of any tag in base.html
+<script type="">
+
+$('#div1 p').attr('src') == returns the value of attribute src of first paragraph(cuz tag is p in div) in div with id=div1
+
+The find( selector ) method can be used to locate all the descendant elements of a particular type of elements. The selector can be written using any selector syntax.  
+</script>
+
+
+Some usefull jquery snippets :-
+
+#1 .
+<script type = "text/javascript" language = "javascript">
+    $(document).ready(function() {
+        $("div").click(function () {
+
+        var content = $(this).html(); // this stores the html content of this tag in var content which can be used to fill in other tags
+        $(this).replaceWith("<h1>JQuery is Great</h1>");   // this will replace the div atgs content with the "<h1>JQuery is Great</h1>"
+
+        $(this).before(content );  // this will insert the contents value before the content of this
+        $(this).after(content);    // same as above
+
+        $(this).clone().insertAfter(this);  // this makes a clone of current element and inserts after itself
+        $(this).empty();    // The empty( ) method removes all child nodes from the set of matched elements.
+        $(this).prepend('<div class = "div"></div>' );   // The prepend( content ) method prepends content to the inside of every matched element.
+
+Compare it with append( content ) method.       
+    });
+  });
+</script>
+
+#2.
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("a").click(function(event){
+          event.preventDefault();    // this prevent the default behaviour for the a tag
+           alert( "Default behavior is disabled!" );
+        });
+
+});
+
+</script>
+
+#3.
+      <script type = "text/javascript" language = "javascript">
+         $(document).ready(function() {
+
+            function aClick() {
+               $("div").show().fadeOut("slow");   // definition of aClick function
+            }
+        
+            $("#bind").click(function () {
+               $("#theone").on("click", aClick).text("Can Click!");   // when clicked on bind id's atg the cclick function will be on on #div
+            });
+        
+            $("#unbind").click(function () {
+               $("#theone").off("click", aClick).text("Does nothing...");   // this does opposite of above i.e offs the aClick function on #div
+            });
+        
+         });
+      </script>
+
+#4.  
+      <script type = "text/javascript" language = "javascript">
+         $(document).ready(function() {
+
+            $('div').hover(   // means whatr happens when u hover over any div tag
+        
+               function () {
+                  $(this).css({"background-color":"red"});
+               }, 
+        
+               function () {   // when not hover over
+                  $(this).css({"background-color":"blue"});
+               }
+            );
+        
+         });
+      </script>
+
+
+##############################&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&******************************************************
+
+<script type="text/javascript">
+  
+Selectors Examples
+
+Similar to above syntax and examples, following examples would give you understanding on using different type of other useful selectors −
+Here, you have different type of other useful selectors −
+//S.N.  Selector & Description
+1   $('*')
+
+//This selector selects all elements in the document.
+2   $("p > *")
+
+//This selector selects all elements that are children of a paragraph element.
+3   $("#specialID")
+
+//This selector function gets the element with id="specialID".
+4   $(".specialClass")
+
+//This selector gets all the elements that have the class of specialClass.
+5   $("li:not(.myclass)")
+
+//Selects all elements matched by <li> that do not have class = "myclass".
+6   $("a#specialID.specialClass")
+
+//This selector matches links with an id of specialID and a class of specialClass.
+7   $("p a.specialClass")
+
+//This selector matches links with a class of specialClass declared within <p> elements.
+8   $("ul li:first")
+
+//This selector gets only the first <li> element of the <ul>.
+9   $("#container p")
+
+//Selects all elements matched by <p> that are descendants of an element that has an id of container.
+10  $("li > ul")
+
+//Selects all elements matched by <ul> that are children of an element matched by <li>
+11  $("strong + em")
+
+//Selects all elements matched by <em> that immediately follow a sibling element matched by <strong>.
+12  $("p ~ ul")
+
+//Selects all elements matched by <ul> that follow a sibling element matched by <p>.
+13  $("code, em, strong")
+
+//Selects all elements matched by <code> or <em> or <strong>.
+14  $("p strong, .myclass")
+
+//Selects all elements matched by <strong> that are descendants of an element matched by <p> as well as all elements that have a class of myclass.
+15  $(":empty")
+
+//Selects all elements that have no children.
+16  $("p:empty")
+
+//Selects all elements matched by <p> that have no children.
+17  $("div[p]")
+
+//Selects all elements matched by <div> that contain an element matched by <p>.
+18  $("p[.myclass]")
+
+//Selects all elements matched by <p> that contain an element with a class of myclass.
+19  $("a[@rel]")
+
+//Selects all elements matched by <a> that have a rel attribute.
+20  $("input[@name = myname]")
+
+//Selects all elements matched by <input> that have a name value exactly equal to myname.
+21  $("input[@name^=myname]")
+
+//Selects all elements matched by <input> that have a name value beginning with myname.
+22  $("a[@rel$=self]")
+
+//Selects all elements matched by <a> that have rel attribute value ending with self.
+23  $("a[@href*=domain.com]")
+
+//Selects all elements matched by <a> that have an href value containing domain.com.
+24  $("li:even")
+
+//Selects all elements matched by <li> that have an even index value.
+25  $("tr:odd")
+
+//Selects all elements matched by <tr> that have an odd index value.
+26  $("li:first")
+
+//Selects the first <li> element.
+27  $("li:last")
+
+//Selects the last <li> element.
+28  $("li:visible")
+
+//Selects all elements matched by <li> that are visible.
+29  $("li:hidden")
+
+//Selects all elements matched by <li> that are hidden.
+30  $(":radio")
+
+//Selects all radio buttons in the form.
+31  $(":checked")
+
+//Selects all checked box in the form.
+32  $(":input")
+
+//Selects only form elements (input, select, textarea, button).
+33  $(":text")
+
+//Selects only text elements (input[type = text]).
+34  $("li:eq(2)")
+
+//Selects the third <li> element.
+35  $("li:eq(4)")
+
+//Selects the fifth <li> element.
+36  $("li:lt(2)")
+
+//Selects all elements matched by <li> element before the third one; in other words, the first two <li> elements.
+37  $("p:lt(3)")
+
+//selects all elements matched by <p> elements before the fourth one; in other words the first three <p> elements.
+38  $("li:gt(1)")
+
+//Selects all elements matched by <li> after the second one.
+39  $("p:gt(2)")
+
+//Selects all elements matched by <p> after the third one.
+40  $("div/p")
+
+//Selects all elements matched by <p> that are children of an element matched by <div>.
+41  $("div//code")
+
+//Selects all elements matched by <code>that are descendants of an element matched by <div>.
+42  $("//p//a")
+
+//Selects all elements matched by <a> that are descendants of an element matched by <p>
+43  $("li:first-child")
+
+//Selects all elements matched by <li> that are the first child of their parent.
+44  $("li:last-child")
+
+//Selects all elements matched by <li> that are the last child of their parent.
+45  $(":parent")
+
+//Selects all elements that are the parent of another element, including text.
+46  $("li:contains(second)")
+
+//Selects all elements matched by <li> that contain the text second.
+
+//You can use all the above selectors with any HTML/XML element in generic way. For example if selector $("li:first") works for <li> element then $("p:first") would also work for <p> element.
+
+</script>

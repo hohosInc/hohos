@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}
+  {% trans 'hohos - Privacy Policy' %}
+{% endblock %}
+
+
+{% block head %}
+
+<style type="text/css">
+
+	body {background-color: #008080; color: white; padding: 5px; text-align: left; font-size: 17px;}
+	h2{ color: black; font-size: 30px; text-align: center; margin-top: 70px; }
+	h5 {color: black; font-size: 15px; padding: 5px;}
+
+	.hr {border-color: gray; margin-top: 9px; margin-bottom:9px;  }
+	strong {color: black;}
+	.mybr {margin-top: 15px;}
+	.address{ color: black;  font-size: 15px; padding: 4px;}
+	a { color: yellow; }
+	a:hover {color: black;}
+
+	.foot { color: black; font-size: 15px; }
+	.popover-content ul li, .popover-title { color: black; }
+
+</style>
+
+{% endblock %}
+
+
+
+{% block main %}
+
+<div class="col col-md-8 col-md-offset-2">
+
+<h2>Privacy Policy</h2>
+<h5 class="pull-right">Last updated: June, 2017</h5> 
+<br>
+<br>
+We 	recognize that your privacy is very important and take it seriously. This Privacy Policy describes hohos' policies and procedures on the collection, use, disclosure, and sharing of your information when you use the hohos Service, via the hohos website.
+
+<br><br>
+<strong>Information Collection and Use</strong> <hr class="hr">
+
+You provide us information about yourself, such as your name, e-mail address and interests, if you register for a member account with the Service. Your name and other information you choose to add to your profile will be available for public viewing on the Service. If you correspond with us by email, we may retain the content of your email messages, your email address and our responses.
+
+If you use your Facebook, Twitter, or other social networking site (“SNS”) account information to sign in to hohos, we will collect and store your SNS user ID.
+
+You also provide us information in User Content you post to the Service. Your photos, response photos, and other contributions on the Service, and metadata about them (such as when you posted them), are publicly viewable on the Service, along with your name. This information may be searched by search engines and be republished elsewhere on the Web in accordance with our Terms of Service.
+
+If you choose to use our invitation service to invite a friend to the Service, we will ask you for that person’s email address and automatically send an email invitation. hohos stores this information to send invitations, to register your friend if your invitation is accepted, to track the success of our invitation service, and to identify your friends on hohos. By providing your friends’ email addresses to hohos, you warrant that you have their consent to do so and for hohos to use this information as described above.
+
+<br><br>
+<strong>Links to Other Web Sites</strong> <hr class="hr"> 
+
+We are not responsible for the practices employed by websites linked to or from the Service, nor the information or content contained therein. Please remember that when you use a link to go from the Service to another website, our Privacy Policy is no longer in effect. Your browsing and interaction on any other website, including those that have a link on our website, is subject to that website’s own rules and policies.
+
+<br><br>
+<strong>Changes to Our Privacy Policy</strong> <hr class="hr"> 
+
+If we change our privacy policies and procedures, we will post those changes on this page to keep you aware of what information we collect, how we use it and under what circumstances we may disclose it. Changes to this Privacy Policy are effective when they are posted on this page.
+
+If you have any questions about our practices or this Privacy Policy, please contact us at 
+<a href="{% url 'contact' %}">hohos</a> , or send mail to:
+
+<hr class="hr">
+<div class="address">
+hohos, Inc.<br class="mybr">
+Mnnit Campus, 211002 <br class="mybr">
+Allahabad, Uttar Pradesh <br class="mybr">
+India
+</div>
+<hr class="hr">
+
+{% endblock main %}

@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load staticfiles %}   
+{% load i18n %} 
+ 
+
+{% block title %}
+  {% if request.user == page_user %}
+   hohos -  Everything you share at hohos
+  {% else %}
+   hohos -  Everything {{ page_user.profile.get_screen_name }} share at hohos 
+  {% endif %}
+{% endblock %}
+   
+
+{% block head %}   
+  <link href="{% static 'css/feeds.css' %}?v=1" rel="stylesheet">
+  <script src="{% static 'js/jquery.bullseye-1.0-min.js' %}"></script>
+  <script src="{% static 'js/feeds.js' %}?v=1"></script>
+<style type="text/css">
+.btn-compose,.my {background-color:#008080;}
+.mytext{color:#008080;}   
+.greentext {color: #2ABE5E}
+.white {color: white;} 
+.bottom_gap {margin-bottom: 7px;}
+.center {margin-left: 50px;} 
+.redtext{color: red}
+.aboutuser {margin-top: 20px;}
+.aboutuser li {color: #008080; list-style: none; padding:3px; margin-left: -35px;}
+.aboutuser h3{color: green; margin-left: 0px;}
+
+ul.stream li div.feed-container:hover{
+  cursor: pointer;
+  background-color: #f5f8fa;
+} 
+
+.like{ font-weight: bold; font-size:13px; color: gray; }
+.unlike { font-weight: bold; color: #008080; font-size:12px; }
+.post a { text-decoration: none; }
+.post a:hover { color: #008080; }
+
+.center {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+.small_pic {
+  max-width:  60px; 
+  min-width:  60px;
+  max-height: 60px; 
+  min-height: 60px;
+}
+</style>
+{% endblock head %}  
+  
+
+{% block main %}
+ 
+<div class="row">
+    <div class="col-md-4 user-profile">
+        <a href="#">
+        <img src="{{page_user.profile.get_picture}}" class="img img-responsive">
+        </a> 
+ 
+        <table style="margin-top:7px; margin-bottom:7px; margin-left:50px;">
+        <tr>
+        <th colspan="5" align="left">
+      {% if page_user.profile.likes %}
+        <button type="button" class="btn btn-danger" title="Like {{ page_user.profile.get_screen_name }} on live profile to share your feeling!!" style="color:pink;">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likers' %} {{ page_user.profile.likes}}
+        </button> 
+      {% else %}
+      {% endif %}
+
+      {% if page_user.profile.likes_to %}
+        <button type="button" class="btn btn-success" title="{{page_user}} is liking {{ page_user.profile.likes_to }} people!">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likes to' %} {{ page_user.profile.likes_to }}
+        </button>
+      {% else %}
+        <button type="button" class="btn btn-success" title="{{page_user}} is liking {{ page_user.profile.likes_to }} people!">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likes to no one' %} 
+        </button>
+      {% endif %}
+        </th>
+        </tr>
+        </table>
+
+
+    <ul class="aboutuser">
+      {% include 'core/about_user.html' %}
+    </ul> 
+
+  </div>
+
+
+    <div class="col-md-6">
+
+        {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% endif %}
+        
+        <div style="margin-top:25px;" class="page-header">    
+
+          {% if request.user == page_user %}
+          <a href="{% url 'profile' page_user.username %}" class="btn my white center" title="{% trans 'Go to your live profile' %}">
+          <span class="glyphicon glyphicon-share-alt"></span> 
+          {% trans 'See what people are talking about you hooho!! ' %}
+          </a>
+          {% else %}
+          <a href="{% url 'profile' page_user.username %}" class="btn my white center" title="{% trans 'Go to live profile of ' %}{{ page_user.profile.get_screen_name }}">
+          <span class="glyphicon glyphicon-share-alt"></span> 
+          {% trans 'Share your feelings about ' %}{{ page_user.username }}
+          </a>
+          {% endif %}
+        </div><br>
+          
+
+
+
+  <ul class="nav nav-tabs center">
+    <li><a type="button" href="{% url 'profile_talks_by_page_user' page_user.username %}" class="btn btn-success"> Profile Talks </a></li>
+    <li><a type="button" href="{% url 'challenges_by_page_user' page_user.username %}" class="btn btn-success">  Challenges by {{page_user.username}} </a></li>
+    <li><a type="button" href="{% url 'responses_by_page_user' page_user.username %}" class="btn btn-success">  Responses by {{page_user.username}} </a></li>
+
+  </ul>
+
+
+
+<!--           <div class="stream-update">
+            <a href="#"><span class="new-posts"></span> {% trans 'new Talks' %}</a>
+          </div> -->
+          <ul class="stream">
+
+          {% if not challenges_by_page_user %}
+          <br><br>
+          
+          <p style="color: green; text-align: center;"><span style="color: #008080;">{{page_user.profile.get_screen_name}}</span> has not shared anything, yet.<a href="{% url 'profile' page_user.username %}"> request</a> some expressions if you like.</p>
+
+          {% endif %} 
+
+            {% for feed in challenges_by_page_user %}
+              {% include 'feeds/partial_challenge_feed.html' with feed=feed %}
+            {% endfor %}  
+          </ul>
+ 
+          <div class="load">
+            <i class="fa fa-spinner fa-spin fa-1x"></i>
+          </div>
+          
+          <form method="get" action="{% url 'load' %}" id="load_feed" autocomplete="off">
+            <!-- {# csrf_token #}  csrf token is not used in GET METHOD-->   
+            <input type="hidden" name="page_user_name" id="page_user_name" value="{{page_user.username}}">
+            <input type="hidden" name="feed_source" id="feed_source" value="challenges_by_page_user">
+            <input type="hidden" name="from_feed" value="{{ from_feed }}">
+            <input type="hidden" name="page" value="{{ page }}">
+          </form>
+
+
+        </div>
+      </div>
+ 
+{% endblock main %}
+
+
+
+{% block js %}
+
+<script type="text/javascript">
+
+  var load_feeds = function () {
+    if (!$("#load_feed").hasClass("no-more-feeds")) {
+      var next_page = parseInt($("#load_feed input[name='page']").val()) + 1;
+      $("#load_feed input[name='page']").val(next_page);
+      $.ajax({
+        url: '/feeds/load/',
+        data: $("#load_feed").serialize(),
+        cache: false,
+        beforeSend: function () {
+          $(".load").show();
+        },
+        success: function (data) {
+          if (data.length > 0) {
+              $("ul.stream").append(data);
+          }
+          else {
+            $("#load_feed").addClass("no-more-feeds");
+          }
+        },
+        complete: function () {
+          $(".load").hide();
+        }
+      });
+    } 
+  };
+
+  $("#load_feed").bind("enterviewport", load_feeds).bullseye();
+
+</script>
+
+{% endblock js %}
+

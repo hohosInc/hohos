@@ -1,0 +1,122 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load humanize %}   
+     
+   {% block head %}
+   <style type="text/css">
+ .green { 
+    color: #008080;
+ } 
+
+
+   </style>    
+   {% endblock %}   
+
+<li feed-id="{{ feed.pk }}" csrf="{{ csrf_token }}">   
+  <div class="feed-container">
+  <a href="{% url 'challenge_feeds' %}"> <span style="background-color: #A9A9A9; font-size: 13px; color: black; border-radius: 7px;"> Challenge</span></a>  
+  <br><br>
+    <a href="{% url 'profile' feed.user.username %}">
+      <img src="{{ feed.user.profile.get_picture }}" class="user small_pic">
+ 
+    </a>
+    <div class="post">
+     
+      {% if feed.user == user or request.user.is_superuser %}
+               <span class="dropdown pull-right">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: gray;"><b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                  <span class="pull-left glyphicon glyphicon-remove remove-feed"> Remove style</span>
+                  </ul>
+              </span>
+      {% endif %}
+
+      <h3><a  href="{% url 'profile' feed.user.username %}">{{ feed.user.profile.get_screen_name }}</a>
+      <small>{{ feed.date|naturaltime }}</small> 
+      <small>
+      <i class="fa fa-arrow-right"></i>
+      {% if feed.challenge_to_user %}
+      <a href="{% url 'profile' feed.challenge_to_user.username %}" style="color: #898080; font-size: 13px;">{{feed.challenge_to_user.profile.get_screen_name}}</a> {% else %} <span style="color: #898080; font-size: 13px;">everyone</span> {% endif %}    
+       </small> 
+      </h3>
+      <p style="margin-bottom:7px; margin-top:15px color:#008080">{{ feed.linkfy_post|safe|linebreaksbr }}</p>
+      <p>
+      {% if feed.post_pic %}
+    <a href="{% url 'special_feeds' feed.id %}">
+    <img src="{{feed.post_pic.url}}" class="img img-responsive challengefeedsimg" title="challenege by {{feed.user.username}}"></a>    
+    {% endif %}
+      </p>
+
+
+{# if request.user.is_active and not "/introho/" in request.get_full_path #}
+
+      <div  style="margin-bottom:7px; margin-top:7px" class="interaction">
+
+
+      {% if feed.likes or feeds.comments %}
+      <!-- <i class="fa fa-heart fa-1x fa-fw" style="color:lightpink;"></i> --><span class="likers">
+      {% if feed.likes %}<a href="{% url 'feeds' feed.id %}" style="color:gray;" class="challengelikes" title="{{feed.likes}} people appreciate {{feed.user.username}}'s challenge, click to show your version of this style"><span>{{feed.likes}} liked</span></a>
+      {% endif %}
+      {% if feed.comments %}<a href="{% url 'feeds' feed.id %}" style="color:gray;"> <span>{{feed.comments}}</span> commented</span></a>
+      {% endif %}
+      <br style="margin-top:5px; margin-bottom:3px;" >
+      {% endif %}
+
+<tr>
+<td>
+        {% if user in feed.get_likers %}
+          <a href="#" class="like unlike">
+            <span class="fa fa-heart-o fa-1x"></span>
+            <span class="text">{% trans 'Liked' %}</span>
+          </a>
+        {% else %}
+          <a href="#" class="like">
+            <span class="fa fa-heart-o fa-1x"></span>
+            <span class="text">{% trans 'Like' %}</span>
+          </a>
+        {% endif %}
+        <a style="color:gray; font-size:12px;" href="#" class="comment">
+          <i class="fa fa-comments fa-1x gray" aria-hidden="true"></i>
+          {% trans 'Comments' %}
+        </a>
+
+</td>
+<td class="pull-right">
+<span>
+<span style="font-size: 10px; color: gray;">Share</span>  
+
+<a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" style="margin-right:2px; margin-left: -2px;">
+<i class="fa fa-facebook fa-1.5x fa-fw"></i>
+</a> 
+<a href="https://twitter.com/home?status={{share_string}}%20{{request.build_absolute_uri}}">
+<i class="fa fa-twitter fa-1.5x fa-fw"></i>
+    </a>
+  </span>
+  </td>
+</tr> <br>
+
+      </div>
+      <div class="comments">
+        <form role="form" method="post" action="{{ comment }}" onsubmit="return false">
+          {% csrf_token %}
+          <input type="hidden" name="feed" value="{{ feed.pk }}">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" placeholder="{% trans 'Write a comment...' %}" name="post" maxlength="255">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-info btn-sm pull-right commentbtn">Comment</button>
+            </span>
+          </div>
+        </form>
+        <ol class="clearfix">
+          {% comment %} Place holder to load feed comments {% endcomment %}
+        </ol>
+      </div>
+
+{# else #}
+{# endif #}
+
+    </div>
+  </div>
+</li>
+
+  <hr style="border-color:lightgray; margin-top:7px; margin-bottom:10px;">

@@ -1,0 +1,129 @@
+{% load staticfiles %} 
+{% load i18n%}
+ 
+    <div style=""> 
+      <div>  
+       <div class="page-header"> 
+        {# if user in page_user.profile.get_likers or user == page_user #}
+        {% if user ==  page_user %}
+        <button type="button" class="btn btn-success pull-right btn-compose" title="{% trans 'use ctrl+p to share something' %}">
+
+        <table>     
+          <tr>
+            <td>
+              Openchat, Whats up {{page_user.profile.get_screen_name}} (
+            </td>
+            <td>
+            <img src="{{page_user.profile.get_picture}}" style="min-height: 40px; max-width: 40px; max-height: 40px; margin-left: -5px; border-radius: 50%; margin-left: 5px;" class="img img-responsive">
+            </td>
+          </tr>
+        </table>   
+
+        </button>           
+        {% else %}   
+        <button type="button" class="btn btn-success pull-right btn-compose" title="{% trans 'use ctrl+p to share something' %}" style="min-width: 100px;">
+
+        <table>
+          <tr>
+            <td>
+              openchat ( 
+            </td>
+            <td>
+            <img src="{{user.profile.get_picture}}" style="min-height: 40px; max-width: 40px; max-height: 40px; border-radius: 50%" class="img img-responsive">
+            </td>
+            <td>
+            <img src="{{page_user.profile.get_picture}}" style="min-height: 40px; max-width: 40px; max-height: 40px; margin-left: -5px; border-radius: 50%" class="img img-responsive">
+            </td>
+          </tr>
+        </table>
+        </button> 
+        {% endif %}  
+        {# elif request.user.is_authenticated #}
+        <!-- <p id="suggest">Hey {{user}}, Like {{page_user.profile.get_screen_name}} to Share something about {{page_user}}</p> -->
+        {# endif #}  
+
+        {% if not request.user.is_authenticated %}
+        <button type="button" class="btn btn-primary pull-right btn-compose" title="{% trans 'use ctrl+p to share something' %}">
+        <span class="glyphicon glyphicon-share-alt"></span> 
+        {% trans "Beho ,Begin saying something about us @hohoos ..." %}
+        </button>
+        {% endif %}
+        <br> 
+        </div> 
+
+        <div class="panel panel-default panel-feed">
+        <div class="panel-heading">
+        {% if request.user == page_user %}
+          <table>
+            <tr>
+              <th colspan="10" float="left"><div><i style="margin-left: 10px;color:green; margin-right: 7px;" class='fa fa-users fa-1x fa-fw'></th>
+              <th colspan="10" float="left"><div> </th>
+              <th colspan="10" float="center" style="color:green;">{% trans "Here's what people are talking about You" %}</th>
+            </tr>
+          </table>
+        {% else %}
+          <table>
+            <tr>
+              <th colspan="10" float="left"><div><i style="margin-left: 10px;color:green; margin-right: 7px;" class='fa fa-users fa-1x fa-fw'></th>
+              <th colspan="10" float="left"><div></th>
+              <th colspan="10" float="center" style="color:green;">{% trans "Here's what people are talking about " %}{{ page_user.profile.get_screen_name }}</th>
+            </tr>
+          </table>
+        {% endif %}
+        </div>
+        
+        <div class="panel-body">
+          <div class="compose">
+              <table class="center"> <br>
+              <tr>
+                <td><a href="{% url 'profile' request.user.username %}">
+                  <img src="{{request.user.profile.get_picture}}" style="max-width: 30px; max-height: 30px; border-radius: 50%; margin-right: 10px;" class="img img-responsive"></a>
+                </td>
+                <td>
+                {% if request.user == page_user %}
+                  <span style="color: gray;"><i class="fa fa-arrow-right fa-1x"></i> {% trans "Tell people whats up with you " %}</span>
+                {% else %}
+                  <span style="color: gray;">{% trans "Say something about " %}<i class="fa fa-arrow-right fa-1x"></i> {{page_user.profile.get_screen_name}}</span>
+                </td>
+                <td><a href="{% url 'profile' request.user.username %}">
+                  <img src="{{page_user.profile.get_picture}}" style="max-width: 30px; max-height: 30px; border-radius: 50%; margin-right: 10px; margin-left: 10px;" class="img img-responsive"></a>
+                </td> 
+                {% endif %}                    
+              </tr>
+              </table><br>
+
+            <form  role="form" id="compose-form" enctype="multipart/form-data">
+              {% csrf_token %} 
+              <input type="hidden" name="to_user" value="{{page_user.username}}" >
+<!--               <input type="hidden" name="last_feed"> -->
+              <!-- <input type="hidden" name="profile_pk" value="{{page_user.profile.pk}}"> -->
+              <input type="hidden" name="is_product_feed" value="{{page_user.profile.is_product}}">
+              <input type="hidden" name="mail_type" value="profile_talk_mail">
+
+<!--               <table>  
+              <tr style="background-color: gray; border-radius: 7px;">
+                <td>
+                  <span> Add Photo</span>    
+                </td>
+                <td>
+                  <input type="file" name="post_pic" required="True" style="max-width:250px; padding-bottom: 4px; margin-top: -10px;">
+                </td>
+              </tr>
+              </table> -->
+              <div class="form-group">
+                <textarea class="form-control" style=" max-width: 520px;" name="post" required="True"></textarea>
+              </div>
+              <div class="form-group">  
+                <button type="button" class="btn btn-primary my btn-post">
+                  <span class="glyphicon glyphicon-send"></span> {% trans 'Say!' %}
+                </button>
+               
+                <button type="button" class="btn btn-default btn-cancel-compose">{% trans 'Cancel' %}</button>
+              </div>
+
+            </form>
+           </div>
+          </div>
+         </div> 
+        </div>
+      </div>

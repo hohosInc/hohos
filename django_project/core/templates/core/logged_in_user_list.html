@@ -1,0 +1,13 @@
+<!-- {% if users %}
+<ul class="user-list">
+    {% for user in users %}
+    <li>{{ user }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+ -->
+ <table>
+   <tr><th>Last Seen</th><td>{% if profile.last_seen %}{{ profile.last_seen|timesince }}{% else %}awhile{% endif %} ago</td></tr>
+   <tr><th>Online</th><td>{{ profile.online }}</td></tr>
+ </table>
