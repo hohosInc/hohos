@@ -10,7 +10,10 @@ PROJECT_DIR = Path(__file__).parent
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret! 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+from .sensitive import (SECRET_KEY,EMAIL_HOST,EMAIL_HOST_USER,EMAIL_HOST_PASSWORD,EMAIL_PORT)
+
+if os.environ.get('SECRET_KEY'):
+    SECRET_KEY = os.environ.get('SECRET_KEY')
    
 # SECURITY WARNING: don't run with debug turned on in production!
   
@@ -19,17 +22,17 @@ DEBUG = False # if you set it False then the allowed host must be saved to som p
 
 #ALLOWED_HOSTS = ['139.59.22.43']
 ALLOWED_HOSTS = ['139.59.77.182','.hohos.tech','hohos.tech','www.hohos.tech','www.tmall.com']   #'139.59.22.43','hohos.in'
-   
+
     
 ADMINS = (   
     ('deepak','imperialarkon@gmail.com'), 
     )
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD =os.environ.get('EMAIL_HOST_PASSWORD') 
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER=EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD =EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
 
 ''' 
 If using gmail, you will need to
@@ -139,7 +142,10 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 #     }
 # } 
 
-from .sensitiv import (DB_NAME, DB_PASS,DB_USER,DB_PORT)
+from .sensitive import (DB_NAME,DB_PASS,DB_USER,DB_PORT)
+# DB_NAME=os.environ.get('DB_NAME')
+
+# if os.environ.get('DB_NAME'):
 # DB_NAME=os.environ.get('DB_NAME')
 
 DATABASES = {
