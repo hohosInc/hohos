@@ -19,7 +19,6 @@ from django.contrib.auth.views import (
     )   
        
 
-#url(r'^kali/admin/work/ssecure/ssensitive/kali/', include(admin.site.urls)),
 
 urlpatterns = [          
     # url(r'^$',core_views.wait,name='wait'),
@@ -27,7 +26,7 @@ urlpatterns = [
     url(r'^sitemap/$', core_views.sitemap, name='sitemap'),
 
     url(r'^$', core_views.home , name='home'),
-    url(r'^__kali/admin/work/ssecure/ssensitive/kali/', include(admin.site.urls)),
+    
 
     url(r'^interactions/', include('newsletter.urls',namespace='interactions')),
     
