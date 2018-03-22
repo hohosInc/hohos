@@ -4,3 +4,7 @@ data_new.json
 django_project/django_project/media_root
 django_project/
 .Trash*
+*.swo
+*.swp
+
+
