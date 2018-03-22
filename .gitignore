@@ -8,6 +8,7 @@ django_project/
 *.swp
 django_project/db.sqlite3
 django_project/sensitive.py
+mission_ajax
 
 
 # Byte-compiled / optimized / DLL files
