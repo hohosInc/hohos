@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}{% trans 'hohos - Settings, Make a strong Password @hohos' %}{% endblock %}
+ 
+{% block head %}
+<style type="text/css">
+.container-fluid a {color: black;}
+.container-fluid i {color: white;}
+.footer {
+  position: bottom;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #008080;
+  text-align: center;
+}
+
+</style>
+{% endblock %}
+
+
+{% block main %}
+  <div class="page-header mytext">
+    <table>
+    <tr>
+    <th>
+    <i style="color: #008080;" class='fa fa-refresh fa-spin fa-3x fa-fw'></i>
+    </th> 
+    <th>
+      <h1>{% trans 'Account Settings' %}</h1>
+    </th> 
+    </tr>
+  </table>
+
+  <!--       this url will be set to a constant
+      account of hohos so, it will be done when its launched  --> 
+      <a type="button" href="{% url 'profile' 'hohoshelp' %}" class="pull-right  btn btn-info btn-sm"><small>Any Problem?</small></a>
+
+  </div><hr style="border-color:#008080;">
+
+  <div class="row">
+
+    <div class="col-md-3" style="margin-top:45px;">
+      {% include 'core/partial_settings_menu.html' with active='profile' %}
+
+      <img src="{{request.user.profile.get_picture}}" class="img img-responsive" >
+      <span class="mytext" style="font-weight:bold; margin-top:40px; margin-left:50px;">
+      <i class="fa fa-user fa-1x fa-fw"></i>
+      {{request.user.profile.get_screen_name}}
+      </span>
+
+      <hr style="border-color:#008080;" >
+
+      <table>
+        <tr>
+          <th colspan="10" float="left"><div><i style="margin-left: 10px;color:green;" class='fa fa-openid fa-2x fa-fw'></th>
+          <th colspan="10" float="left"><div><i style="color: #008080;" class='fa fa-refresh fa-spin fa-1x fa-fw'></th>
+          <th colspan="10" float="center" style="color:green;"> <span style="font-weight:bold; color:red;">
+          {% if request.user.profile.status %}{{request.user.profile.status}}{% endif %}
+          </span></th>
+        </tr>
+      </table>
+
+
+    </div>
+
+    <div style="" class="col-md-5 col-md-offset-2">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <h3 style="" class="mytext">{% trans 'Change Password' %}</h3>
+      <form role="form" class="form-horizontal myfield" method="post" action="{% url 'hohos_digest' %}" style="margin-left:10px;" id="privacy_form">
+        {% csrf_token %}
+
+        <input type="checkbox" name="hohos_digest"> Challenges for you<br>
+
+
+        <div class="form-group">
+          <div>
+            <button style="width:200px;" type="submit" class="my btn btn-success">{% trans 'Save' %}</button>
+          </div>
+        </div>
+      </form>
+
+      <hr class="hr" style="margin-top: 20px;">
+      <a href="{% url 'home' %}"><h1 style="color: black; text-align: center; font-size: 70px;">hohos</h1></a>
+
+      <div style="text-align: center;">
+      <div class="fb-like" data-href="https://www.facebook.com/hohosguys/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+      </div>
+
+      <hr class="hr">
+
+      <small style="color: white; "><a href="{% url 'home' %}">Home </a><a href="{% url 'about' %}">About </a><a href="{% url 'contact' %}">Contact </a><a href="{% url 'privacy' %}">Privacy </a><a href="{% url 'tos' %}">Terms </a></small>
+      <br style="margin-top: 3px;">
+      <small>Copyright © 2017 hohos. All rights reserved.</small>
+      <br><br>
+
+    </div>
+  </div>
+{% endblock main %}
+

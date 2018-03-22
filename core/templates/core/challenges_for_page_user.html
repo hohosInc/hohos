@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load staticfiles %}   
+{% load i18n %} 
+ 
+
+{% block title %}
+  {% if request.user == page_user %}
+   hohos -  Everything you share at hohos
+  {% else %}
+   hohos -  Everything {{ page_user.profile.get_screen_name }} share at hohos 
+  {% endif %}
+{% endblock %}
+
+
+{% block head %}   
+  <link href="{% static 'css/feeds.css' %}" rel="stylesheet">
+  <script src="{% static 'js/jquery.bullseye-1.0-min.js' %}"></script>
+  <script src="{% static 'js/feeds.js' %}"></script>
+<style type="text/css">
+.btn-compose,.my {background-color:#008080;}
+.mytext{color:#008080;}
+.greentext {color: #2ABE5E}
+.white {color: white;} 
+.bottom_gap {margin-bottom: 7px;}
+.center {margin-left: 50px;}
+.redtext{color: red}
+.aboutuser {margin-top: 20px;}
+.aboutuser li {color: #008080; list-style: none; padding:3px; margin-left: -35px;}
+.aboutuser h3{color: green; margin-left: 0px;}
+
+ul.stream li div.feed-container:hover{
+  cursor: pointer;
+  background-color: #f5f8fa;
+} 
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+</style>
+{% endblock head %}  
+  
+
+{% block main %}
+ 
+<div class="row">
+    <div class="col-md-4 user-profile">
+        <a href="#">
+        <img src="{{page_user.profile.get_picture}}" class="img img-responsive">
+        </a> 
+ 
+        <table style="margin-top:7px; margin-bottom:7px; margin-left:50px;">
+        <tr>
+        <th colspan="5" align="left">
+      {% if page_user.profile.likes %}
+        <button type="button" class="btn btn-danger" title="Like {{ page_user.profile.get_screen_name }} on live profile to share your feeling!!" style="color:pink;">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likers' %} {{ page_user.profile.likes}}
+        </button> 
+      {% else %}
+      {% endif %}
+
+      {% if page_user.profile.likes_to %}
+        <button type="button" class="btn btn-success" title="{{page_user}} is liking {{ page_user.profile.likes_to }} people!">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likes to' %} {{ page_user.profile.likes_to }}
+        </button>
+      {% else %}
+        <button type="button" class="btn btn-success" title="{{page_user}} is liking {{ page_user.profile.likes_to }} people!">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likes to no one' %} 
+        </button>
+      {% endif %}
+        </th>
+        </tr>
+        </table>
+
+<ul class="aboutuser">
+
+{% include 'core/about_user.html' %}
+
+</ul> 
+
+        </div>
+
+
+    <div class="col-md-6">
+
+        {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% endif %}
+        
+        <div style="margin-top:25px;" class="page-header">    
+          
+          {% if request.user == page_user %}
+          <a href="{% url 'challenge_feeds' %}" class="btn my white center" title="{% trans 'Go and challenge' %}">
+          <span class="glyphicon glyphicon-share-alt"></span> 
+          {% trans 'Challenge friends ' %}
+          </a>
+          {% else %}
+          <a href="{% url 'challenge_feeds' %}" class="btn my white center" title="{% trans 'Go and challenge ' %}{{ page_user.profile.get_screen_name }}">
+          <span class="glyphicon glyphicon-share-alt"></span> 
+          {% trans 'Challenge ' %}{{ page_user.username }}
+          </a>
+          {% endif %}
+        </div><br>
+          
+<!--           <div class="stream-update">
+            <a href="#"><span class="new-posts"></span> {% trans 'new Talks' %}</a>
+          </div> -->
+
+          <ul class="stream">
+
+
+          {% if not challenges_for_page_user %}
+          <br><br>
+            {% if page_user == request.user %}
+              <p style="color: green; text-align: center;"><span style="color: #008080;">No body has challenged you till now
+              </p>
+              <br><br><br> <i class="fa fa-smile-o fa-5x center" style="color: pink;"></i>
+            {% else %}
+              <p style="color: green; text-align: center;"><span style="color: #008080;">{{page_user.profile.get_screen_name}}</span> has not been challenged anything, yet.<a href="{% url 'challenge_feeds' %}"> Go and Challenge </a>{{page_user.profile.get_screen_name}}</p>
+              <br><br><br> <i class="fa fa-smile-o fa-5x center" style="color: pink;"></i>              
+            {% endif %}
+          {% endif %}
+
+
+            {% for feed in challenges_for_page_user %}
+              {% include 'feeds/partial_challenge_feed.html' with feed=feed %}
+            {% endfor %} 
+          </ul>
+ 
+          <div class="load">
+            <img src="{% static 'img/loading.gif' %}">
+          </div>
+          
+          <form method="get" action="{% url 'load' %}" id="load_feed" autocomplete="off">
+            <!-- {% csrf_token %}  csrf token is not used in GET METHOD-->   
+            <input type="hidden" name="profile_pk" id="profile_pk" value="">
+            <input type="hidden" name="page_user_name" id="page_user_name" value="{{page_user.username}}">
+            <input type="hidden" name="feed_source" id="feed_source" value="user_feeds">
+            <input type="hidden" name="from_feed" value="{{ from_feed }}">
+            <input type="hidden" name="page" value="{{ page }}">
+          </form>
+        </div>
+      </div>
+ 
+{% endblock main %}

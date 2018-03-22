@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %} Mission Jquery-Ajax {% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block body %}
+<style>
+
+         div.green { margin: 0px; width: 100px; height: 80px; background: green; 
+            border: 1px solid black; position: relative; }
+				
+         div.red { margin-top: 10px; width: 50px; height: 30px; background: red; 
+            border: 1px solid black; position: relative; }
+				
+         /* Following is required  to show border while transferring.*/
+         .ui-effects-transfer { border: 2px solid black; }
+
+</style>
+ 
+
+<div  class="row" style="margin-top: 80px">
+	
+	<h2 style="text-align: center;">Mission-Ajax.. Hurrah!</h2>
+	<p class="pull-right"><a href="{% url 'ajax:basics' %}">|Ajax-basics|</a></p>
+   <p class="pull-right"><a href="{% url 'ajax:interactions' %}">|Ajax-interactions|</a></p>
+   <p class="pull-right"><a href="{% url 'ajax:widgets' %}">|Ajax-widgets|</a></p>
+
+	<div class="col col-sm-6">
+      <p>Placeholder for the images to show effects</p>	<br>	
+      <div class = "target1">
+         <img src = "{% static 'img/login_cover_new.jpg' %}" alt = "jQuery" style="max-height: 300px; max-width: 300px;" />
+      </div>
+	
+      <div  class = "green"></div>
+      <div  class = "red"></div>
+
+	</div>
+
+	<div class="col col-sm-6">
+      <p>Click the button</p>
+      <button class="btn btn-default" id = "button"> Bounce </button> <br>
+
+      <button class="btn btn-success" id = "hide"> Hide Blind </button>
+      <button class="btn btn-success" id = "show"> Show Blind </button><br>
+
+      <button class="btn btn-warning" id = "hide3"> Hide Drop </button>
+      <button class="btn btn-warning" id = "show3"> Show Drop </button> <br>
+
+      <button class="btn btn-info"  id = "hide4"> Hide Explode </button>
+      <button class="btn btn-info"  id = "show4"> Show Explode</button>	<br>
+
+      <button class="btn btn-success"  id = "hide5"> Hide Pull Effect </button>
+      <button class="btn btn-success"  id = "show5"> Show Pull Effect</button>	<br>
+
+      <button class="btn btn-default"  id = "hide6"> Hide Fold </button>
+      <button class="btn btn-default"  id = "show6"> Show Fold</button>	<br>
+      
+      <button class="btn btn-warning" id = "button1"> Pulsate Effect </button> <br>
+
+      <button class="btn btn-default"  id = "hide7"> Hide by scaling </button>
+      <button class="btn btn-default"  id = "show7"> Show by scaling</button>	<br>
+      
+      <button class="btn btn-info" id = "shake"> Shake Effect </button> <br>
+
+      <button class="btn btn-warning" id = "slide"> Slide Effect </button> <br>
+
+      <button class="btn btn-success" id = "transfer"> Transfer Effect </button> <br>
+
+	</div>
+
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+
+<!-- jquery library -->
+<script type = "text/javascript" src = "{% static 'jquery/jquery.min.js' %}"></script>
+ <!-- jquery ui library -->
+<script type = "text/javascript" src = "{% static 'jquery/jqueryui.js' %}"></script>
+		
+      <script type = "text/javascript" language = "javascript">
+         $(document).ready(function() {
+   
+            $("#hide").click(function(){
+               $("#hide").text('chuchu');
+               // $(".target1").hide( "blind", {direction: "horizontal"}, 1000 );
+            });
+
+            $("#show").click(function(){
+               $(".target1").show( "blind", {direction: "vertical"}, 1000 );
+            });
+				
+         });
+      </script>
+
+       <script type = "text/javascript" language = "javascript">
+   
+         $(document).ready(function() {
+
+            $("#button").click(function(){
+               $(".target1").effect( "bounce", {times:3}, 300 );
+            });
+
+         });
+			
+      </script>
+
+      <script type="text/javascript">
+      	
+      $('#hide3').click(function(){
+
+      	$('.target1').hide('drop',{direction:'up'}, 1000);  // drop can be replaced by clip and up by horizontal and vertical
+      });
+      $('#show3').click(function(){
+
+      	$('.target1').show('drop', {direction:'up'}, 1000)
+      });
+
+      $('#hide4').click(function(){ 				// selector for clicking on hide4
+
+      	$('.target1').hide('explode', {pieces:16}, 2000);    // hides element of class target1 with explosion in 16 pieces in 2000 miliseconds
+      });
+      $('#show4').click(function(){
+
+      	$('.target1').show('explode', {pieces:16}, 2000);
+      });
+      </script>
+      
+      <script type="text/javascript">
+      	$(document).ready(function(){
+      		$('#hide6').click(function(){
+
+      			$('.target1').hide('fold',{horizFirst:true}, 2000);
+      		});
+
+      		$('#show6').click(function(){
+
+      			$('.target1').show('fold',{horizFirst:true}, 2000);
+      		});
+
+      		   $("#hide5").click(function(){
+               $(".target1").hide( "puff", { }, 2000 );
+            });
+
+            $("#show5").click(function(){
+               $(".target1").show( "puff", {percent:100}, 2000 );
+            });
+      	})	
+      </script>
+
+<script type="text/javascript">
+	
+$('#button1').click(function(){
+	$('.target1').effect('pulsate',{times:10}, 1000);
+})
+
+$('#show7').click(function(){
+	$('.target1').show('scale', {percent:200, direction:'vertical'}, 2000);
+});
+$('#hide7').click(function(){
+	$('.target1').hide('scale', {percent:200, direction:'horizontal'}, 2000);
+});
+
+$('#shake').click(function(){
+	$('.target1').effect('shake', {times:5, direction:'horizontal'}, 2000);
+});
+$('#slide').click(function(){
+	$('.target1').effect('slide', { direction:'up'}, 2000);
+});
+
+</script>
+
+<script type="text/javascript">
+	         $(document).ready(function() {
+
+            $("#div").click(function () {
+               var i = 1 - $("#div").index(this);
+               $(this).effect("transfer",{ to: $("#div").eq(i) }, 500);
+            });
+				
+         });
+
+</script>
+
+{% endblock %}
+

@@ -1,0 +1,21 @@
+.profile {
+  margin-top: 1em;
+}
+
+.user-profile .picture {
+  width: 550px;
+  border-radius: 5px;
+}
+.user-profile img {
+  /*width: 700px;*/
+  border-radius: 5px; 
+}
+ 
+.user-profile ul { 
+  padding: 0; 
+  margin-top: .6em; 
+}
+
+.user-profile ul li {
+  list-style: none;
+}

@@ -1,0 +1,45 @@
+{% load i18n %}
+
+{% block head %}
+<style type="text/css">
+.my{
+	background-color: #008080;
+	color: white;
+}
+.myfield{
+  /*margin-right: 25px;*/
+  margin-bottom: 10px;
+  color: #008080;
+  width: 350px; 
+} 
+.mytext{color: #008080;} 
+.greentext{color: green;}
+.redtext{color: red;}
+</style> 
+{% endblock %}
+
+<div class="list-group">
+  {% if request.user.profile.is_product %}
+  <a class="list-group-item" href="{% url 'settings_products' %}" style="color:#008080;">
+  <i class="fa fa-user fa-fw" aria-hidden="true" style="color:#008080;"></i>
+  &nbsp; {% trans 'Profile' %}
+  </a>
+  {% else %}
+  <a class="list-group-item" href="{% url 'settings_human' %}" style="color:#008080;">
+  <i class="fa fa-user fa-fw" aria-hidden="true" style="color:#008080;"></i>
+  &nbsp; {% trans 'Profile' %}
+  </a>
+  {% endif %}
+  <a class="list-group-item" href="{% url 'picture' %}" style="color:#008080;">
+  <i class="fa fa-camera fa-fw" aria-hidden="true"></i>
+  &nbsp; {% trans 'Picture' %}
+  </a>
+  <a class="list-group-item" href="{% url 'password' %}" style="color:#008080;">
+  <i class="fa fa-key fa-fw" aria-hidden="true"></i>
+  &nbsp; 
+  {% trans 'Password' %}
+  </a>
+</div>
+
+
+   

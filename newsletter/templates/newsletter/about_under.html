@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% trans 'hohos - About us' %}
+{% endblock %}
+
+
+{% block head %}
+<style type="text/css">
+.hr {border-color: gray}
+.myview a {color: yellow;}
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="row" style="background-color:#008080; margin-top:-25px;">
+
+      <div class="col-md-4 col-md-offset-1">
+        <!-- <div class="LI-profile-badge"  data-version="v1" data-size="medium" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="deepak-bharti-6a9859107"><a class="LI-simple-link" href='https://in.linkedin.com/in/deepak-bharti-6a9859107?trk=profile-badge'>Deepak Bharti</a></div> -->
+        <img src="{% static 'img/deepak.jpg' %}" class="img img-responsive">
+      
+      <hr class="hr" >
+        <tr>
+          <td>
+          <i class="fa fa-quora fa-1x fa-fw"></i>
+          <a href="https://www.quora.com/profile/Deepak-Bharti-16">Quora</a>
+          </td>
+          <td>
+          <i class="fa fa-facebook fa-1x fa-fw"></i>
+          <a href="https://www.facebook.com/Ddronearkon">Facebook</a>            
+          </td>
+          <td>
+          <i class="fa fa-linkedin fa-1x fa-fw"></i>
+          <a href="https://www.linkedin.com/in/deepak-bharti-6a9859107/">Linkedin</a> p           
+          </td> 
+          <td>
+          <i class="fa fa-twitter fa-1x fa-fw"></i>
+          <a href="https://twitter.com/Imperialarkon">Twitter</a>            
+          </td>
+
+        </tr>
+      </div>
+
+      <div class="col col-md-6">
+
+        <p class="myview">
+          We might have better things than we have now. This will bring great changes in us and so around the world.I highly wish to see people getting the best of available resources.I have been working to make it true for my School days.And now I am close to bring some changes.
+        </p>
+
+      </div>
+
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,175 @@
+
+
+{% block head %}
+<style type="text/css">
+.detail_li li{color: #008080; list-style: none; margin-left: -35px;}
+.detail_li i,a {color: gray;}
+h3 {color: green;}
+</style>
+{% endblock %}    
+
+<ul class="detail_li">
+<!-- 	{% if page_user.profile.status %}
+	<li>
+		<i class='fa fa-openid fa-1x fa-fw'></i>
+		{{page_user.profile.status}}
+	</li>
+	{% endif %} --> <br>
+
+	{% if page_user.profile.want_to_do %}
+	<li> 
+		<i class='fa fa-dot-circle-o fa-1x fa-fw'></i>
+		{{page_user.profile.want_to_do}}
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.job %}
+	<li>
+		<i class='fa fa-briefcase fa-1x fa-fw'></i>
+		{{page_user.profile.job}}
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.institute %}
+	<li>
+		<i class='fa fa-university fa-1x fa-fw'></i>
+		{{page_user.profile.institute}}
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.company %}
+	<li>
+		<i class='fa fa-company fa-1x fa-fw'></i>
+		{{page_user.profile.company}}
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.birth_date %}
+	<li>
+		<i class='fa fa-birthday-cake fa-1x fa-fw'></i>
+		{{page_user.profile.birth_date}}
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.home %}
+	<li>
+		<i class='fa fa-home fa-1x fa-fw'></i>
+		{{page_user.profile.home}}
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.website %}
+	<li>
+		<i class='fa fa-external-link-square fa-1x fa-fw'></i>
+		<a href="{{page_user.profile.get_website}}">{{page_user.profile.website}}</a>
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.email %}
+	<li>
+		<i class='fa fa-envelope fa-1x fa-fw'></i>
+		{{page_user.profile.email}}
+	</li>
+	{% endif %}
+
+	<h3><small><i class='fa fa-sign-language fa-1x fa-fw'></i></small>Social Life</h3>
+
+	{% if page_user.profile.facebook %}
+	<li>
+		<i class='fa fa-facebook fa-1x fa-fw'></i>
+		<a href="{{page_user.profile.get_facebook}}">
+		{{page_user.profile.facebook}}</a>
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.quora %}
+	<li>
+		<i class='fa fa-quora fa-1x fa-fw'></i>
+		<a href="{{page_user.profile.get_quora}}">
+		{{page_user.profile.quora}}</a>
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.twitter %}
+	<li>
+		<i class='fa fa-twitter fa-1x fa-fw'></i>
+		<a href="{{page_user.profile.get_twitter}}">
+		{{page_user.profile.twitter}}</a>
+	</li>
+	{% endif %}
+
+	{% if page_user.profile.linkedin %}
+	<li>
+		<i class='fa fa-linkedin fa-1x fa-fw'></i>
+		<a href="{{page_user.profile.get_linkedin}}">
+		</a>
+	</li>
+	{% endif %}
+
+
+  {% if page_user == request.user %}
+  <li>
+    {% if page_user.profile.likes_to %}
+    <i class='fa fa-heart fa-1x fa-fw'></i>
+    You like <a href="{% url 'likes_to' page_user.username %}">
+    {{page_user.profile.likes_to}} people
+    </a> 
+    {% endif %}
+  </li> 
+  {% else %}
+  <li>
+    {% if page_user.profile.likes_to %}
+    <i class='fa fa-heart fa-1x fa-fw'></i>
+    {{page_user.profile.get_screen_name}} likes 
+    <a href="{% url 'likes_to' page_user.username %}">{{page_user.profile.likes_to}} people
+    </a> 
+    {% endif %}
+  </li>
+  {% endif %}
+
+  {% if page_user == request.user %}
+  <li>
+    {% if page_user.profile.likes %}
+    <i class='fa fa-heart fa-1x fa-fw'></i>
+     <a href="{% url 'profile_likers' page_user.username %}">{{page_user.profile.likes}} people</a> like You
+     {% endif %}
+  </li> 
+  {% else %}
+  <li>
+    {% if page_user.profile.likes %}
+    <i class='fa fa-heart fa-1x fa-fw'></i>
+     <a href="{% url 'profile_likers' page_user.username %}">{{page_user.profile.likes}} people</a> like
+    {{page_user.profile.get_screen_name}}
+    {% endif %}
+  </li>
+  {% endif %}
+
+	{% if page_user.profile.likes_most %}
+		{% if page_user == request.user %}
+		<li>
+			<i class='fa fa-heart fa-1x fa-fw'></i>
+			You like {{page_user.profile.likes_most}} most
+		</li>	
+		{% else %}
+		<li>
+			<i class='fa fa-heart fa-1x fa-fw'></i>
+			{{page_user.profile.get_screen_name}} likes {{page_user.profile.likes_most}} most
+		</li>
+		{% endif %}
+	{% endif %}
+
+	{% if page_user.profile.likes_not %}
+		{% if page_user == request.user %}
+		<li>
+			<i class='fa fa-heart fa-1x fa-fw'></i>
+			You like {{page_user.profile.likes_not}} not at all
+		</li>
+		{% else %}
+		<li>
+			<i class='fa fa-heart fa-1x fa-fw'></i>
+			{{page_user.profile.get_screen_name}} likes {{page_user.profile.likes_not}} not at all
+		</li>
+		{% endif %}
+	{% endif %}
+
+</ul>  
