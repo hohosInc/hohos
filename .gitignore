@@ -4,4 +4,4 @@ data_new.json
 *.db
 media_root
 media
-
+.Trash*
