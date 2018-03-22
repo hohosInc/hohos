@@ -24,14 +24,12 @@ ALLOWED_HOSTS = ['139.59.77.182','.hohos.tech','hohos.tech','www.hohos.tech','ww
 ADMINS = (   
     ('deepak','imperialarkon@gmail.com'), 
     )
-      
-  
-EMAIL_USE_TLS = True
-EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_HOST_USER=os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD =os.environ['EMAIL_HOST_PASSWORD'] 
-EMAIL_PORT = os.environ['EMAIL_PORT']
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =os.environ.get('EMAIL_HOST_PASSWORD') 
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
 
 ''' 
 If using gmail, you will need to
@@ -141,16 +139,20 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 #     }
 # } 
 
+from .sensitiv import (DB_NAME, DB_PASS,DB_USER,DB_PORT)
+# DB_NAME=os.environ.get('DB_NAME')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASS'],
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASS,
         'HOST': '139.59.77.182',
-        'PORT': os.environ['DB_PORT'],
+        'PORT': DB_PORT,
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
