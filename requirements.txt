@@ -1,7 +1,0 @@
-django==1.10
-python3
-netifaces
-django-crispy-forms
-bleach
-pillow
-imagekit
