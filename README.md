@@ -65,8 +65,10 @@ Clone the repo and follow these steps
        python3 manage.py runserver <ip>:<port>
        default port is 8000 and default address is 127.0.0.1
        ctrl+c to stop the server
-       
+
+7. *I will soon update readme telling how to deploy hohos on Heroku and Digital Ocean.*
+
        
 *Want to add some feature in hohos, fork the hohos, make changes and create a Pull Request*
-*you can always email me or come on [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) in case of any query*       
-
+*you can always email me or come on gitter in case of any query*       
+[![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby)<br>
