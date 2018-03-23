@@ -169,7 +169,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-#Not using language translation now
+#Not using language translation
 # USE_I18N = True
 
 USE_L10N = True
@@ -177,11 +177,11 @@ USE_L10N = True
 USE_TZ = True
 
 
-LANGUAGES = (
-    ('en', 'English'),
-    ('pt-br', 'Portuguese'),
-    ('es', 'Spanish')
-)
+# LANGUAGES = (
+#     ('en', 'English'),
+#     ('pt-br', 'Portuguese'),
+#     ('es', 'Spanish')
+# )
 
 LOCALE_PATHS = (PROJECT_DIR.child('locale'), )
 
