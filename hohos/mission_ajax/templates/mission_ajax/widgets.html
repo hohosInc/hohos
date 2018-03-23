@@ -1,0 +1,197 @@
+{% load staticfiles %}
+
+{% block title %} Mission Jquery-Ajax {% endblock %}
+
+{% block style %}
+      <style>
+         fieldset {
+            border: 0; 
+         }         
+         label {
+            display: block;
+            margin: 30px 0 0 0;
+         }          
+         select {
+            width: 200px;
+         }         
+         .overflow {
+            height: 200px;
+         }
+         .ui-menu { width: 150px; } 
+      </style>
+
+{% endblock %}
+
+{% block body %}
+<div  class="row" style="margin-top: 80px">
+
+   <h2 style="text-align: center;">Mission-Ajax.. Hurrah!</h2>
+   <p class="pull-right"><a href="{% url 'ajax:basics' %}">|Ajax-basics|</a></p>
+   <p class="pull-right"><a href="{% url 'ajax:effects' %}">|Ajax-effects|</a></p>
+   <p class="pull-right"><a href="{% url 'ajax:interactions' %}">|Ajax-interactions|</a></p>
+
+   <div class="col col-sm-6">
+   <p>Workplace one..</p>
+      <label> Tooltip Example: </label>
+      <input id="input1" title="Enter whatever u can.. hehee" type="text" name="example">
+      <label> Datepicker Example: </label>
+      <input id="datepicker" type="date" name="date">
+      <label> autocomplete Example: </label>
+      <input id="tags" type="text" name="tags">
+      <div id="tabs">
+         <ul> 
+            <li><a href="#tabs-1">Hohos</a></li>
+            <li><a href="#tabs-2">Facebook</a></li>
+            <li><a href="#tabs-3">Youtube</a></li>
+         </ul>
+      <div id="tabs-1">
+         <p>Hey there hohos is all about making people more accessible for each and everyone so that we could connect to eachother in readl sense</p>
+      </div>
+      <div id="tabs-2">
+         <p>Facebook is currently the worlds largets social ,media network. Its been a un distinguishible part of human life.....</p>
+      </div>
+      <div id="tabs-3">
+         <p>Youtube is really a great utility to each and everyone around the world. it has everythinmg for the world. it can teach u as well as entertain u and all sort of things easily!</p>
+      </div>      
+</div>
+
+<div id="accordion">
+   <h3>Google</h3>
+   <div>
+      <p>Google is one of the best tech companies in the world.</p>
+   </div>
+   <h3>Hohos</h3>
+   <div>
+      <p>Hohos is an incarnation around the world inventions.</p>
+   </div>
+</div>
+
+
+
+   </div>
+   <div class="col col-sm-6">
+   <p>Workplace two..</p>
+   <div id="slider"></div>
+   <div id="progressbar"></div>
+
+   <div class = "demo">
+         <form action = "#">
+            <fieldset>    
+               <label for = "speed">Select a speed</label>
+               <select name = "speed" id = "speed">
+                  <option>Slower</option>
+                  <option>Slow</option>
+                  <option selected = "selected">Medium</option>
+                  <option>Fast</option>
+                  <option>Faster</option>
+               </select>
+ 
+               <label for = "files">Select a file</label>
+               <select name = "files" id = "files">             
+                  <optgroup label = "Scripts">
+                     <option value = "jquery">jQuery.js</option>
+                     <option value = "jqueryui">ui.jQuery.js</option>
+                  </optgroup>
+                  
+                  <optgroup label = "Other files">
+                     <option value = "somefile">Some unknown file</option>
+                     <option value = "someotherfile">Some other file with a
+                        very long option text</option>
+                  </optgroup>                 
+               </select>
+               <label for = "number">Select a number</label>
+               <select name = "number" id = "number">
+                  <option>1</option>
+                  <option selected = "selected">2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+               </select>
+            </fieldset>
+         </form>
+      </div>
+      <ul id = "menu">
+         <li class = "ui-state-disabled">Team</li>
+         <li>Gopal K verma</li>
+         <li>Omer</li>
+         <li>Prasanth
+            <ul>
+               <li class = "ui-state-disabled">Krishna</li>
+               <li>Raju</li>
+            </ul>
+         </li>
+         <li>Vineeth</li>
+         <li>Rajeev
+            <ul>
+               <li>Lakshmi
+                  <ul>
+                     <li>Kiran</li>
+                     <li>Sai</li>
+                  </ul>
+               </li>
+               <li>Raju
+                  <ul>
+                     <li>Arshad</li>
+                     <li>Johar</li>
+                  </ul>
+               </li>
+               <li>Gopal</li>
+            </ul>
+         </li>
+         <li class = "ui-state-disabled">Santosh</li>
+         <div id="dialog">
+            <p>Its a dialog box</p>
+         </div>
+         </div>
+   </div>
+
+{% endblock %}
+
+
+{% block js %}
+
+<!-- jquery library -->
+<script type = "text/javascript" src = "{% static 'jquery/jquery.min.js' %}"></script>
+ <!-- jquery ui library -->
+<script type = "text/javascript" src = "{% static 'jquery/jqueryui.js' %}"></script>
+<!-- jquery themes library -->
+<link  href="{% static 'jquery/jquery-ui.css' %}" rel="stylesheet">
+
+<!-- <script src = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel = "stylesheet" href = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
+      <script>
+         $(function() {
+            $('#tabs').tabs();
+            $('#input1').tooltip();
+            $('#slider').slider();
+            $('#gender').selectmenu();
+            $('#company').selectmenu();
+            $('#menu').menu();
+            $('#dialog').dialog();
+            $('#datepicker').datepicker();
+         });
+      </script>
+      
+      <script type="text/javascript">
+
+      $(function(){
+         var availableTags = [
+         'Facebook', 'hohos', 'google', 'svmic', 'apple', 'wipro', 'amazon', 'flipkart',
+         ];
+
+         $('#tags').autocomplete({
+            source:availableTags
+         });
+
+         $('#accordion').accordion();
+
+         $('#progressbar').progressbar({
+            value:37
+         });
+
+      });
+      </script>
+
+
+{% endblock %}
+

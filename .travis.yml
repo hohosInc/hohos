@@ -1,0 +1,3 @@
+language: python
+pip:
+ - 3.5
