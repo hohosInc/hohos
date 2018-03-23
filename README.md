@@ -1,4 +1,4 @@
-hohos 
+hohos
 =======================
 
 <!-- [![Dependency Status](https://david-dm.org/dbads/hohos/status.svg?style=flat)](https://david-dm.org/dbads/hohos) [![Build Status](https://travis-ci.org/dbads/hohos.svg?branch=master)](https://travis-ci.org/dbads/hohos) [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) -->
@@ -13,3 +13,43 @@ hohos
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges)](http://github.com/dbads/hohos/fork)
 [![star this repo](http://githubbadges.com/star.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos)
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos/fork) -->
+
+Visit hohos - [hohos.tech](http://hohos.tech)
+
+Running hohos locally 
+      
+      sudo apt-get install python3
+      sudo apt-get install python3-pip
+      pip3 install -r requrements.txt
+
+Database configuration
+
+     If you use postgresql then
+     Change name of databse, db user, db password, localhost, and you can leave port blank
+     
+     If you want to use sqlite3 then just uncomment the sqlite configuration.
+
+Configuring Settings.py file 
+
+
+     you can make DEBUG=True while you are working locally
+     ALLOWED_HOSTS=['*'] in local
+     
+Sensitive Information
+     
+     There are some variables which are coming from either environment variables or from a file sensitive.py 
+     so you just create this file and pust those variables in that file or you can use environment variables too. 
+     
+     #SENSITIVE DATABASE INFORMATION
+     DB_NAME='xyz'
+     DB_PASS='your_DB_PASS'
+     DB_PORT=5432
+     DB_USER='abc'
+
+     #SENSITIVE EMAIL DATA
+     SECRET_KEY='7yl&y17r&7h*#fk&whgdhgyys#^m$0+k$)l!-idm*md%w_ldcj'
+     EMAIL_HOST='smtp.gmail.com' 
+     EMAIL_HOST_USER='your Email'
+     EMAIL_HOST_PASSWORD='your email password'
+     EMAIL_PORT='587'
+     
