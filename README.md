@@ -1,7 +1,4 @@
-<span align="center">
-
-hohos
-=======================
+<h2 align="center">hohos</h2> <hr>
 
 <!-- [![Dependency Status](https://david-dm.org/dbads/hohos/status.svg?style=flat)](https://david-dm.org/dbads/hohos) [![Build Status](https://travis-ci.org/dbads/hohos.svg?branch=master)](https://travis-ci.org/dbads/hohos) [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) -->
 
@@ -17,7 +14,6 @@ hohos
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos/fork) -->
 
 Visit hohos - [hohos.tech](http://hohos.tech)
-</span>
 
 <h3 align="center">How to run hohos locally ?</h3> <hr>
       
