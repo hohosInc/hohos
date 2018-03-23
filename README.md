@@ -15,8 +15,12 @@ Clone the repo and follow these steps
 1. **Install Requirements**
    
        sudo apt-get install python3
-       sudo apt-get install python3-pip
+       sudo apt-get install python3-pip python3-dev libpq-dev postgresql
+       sudo apt-get install python3-setuptools
        pip3 install -r requrements.txt
+
+       if pip doesn't work, easy_install is there for you e.g.
+       $ easy_install package_name
 
 2. **Database configuration**
 
