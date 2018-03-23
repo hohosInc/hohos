@@ -67,7 +67,7 @@ Clone the repo and follow these steps
        default port is 8000 and default address is 127.0.0.1
        ctrl+c to stop the server
 
-7. *I will soon update readme telling how to deploy hohos on Heroku and Digital Ocean.*
+7. **I will soon update readme telling how to deploy hohos on Heroku and Digital Ocean.**
 
        
 *Want to add some feature in hohos, fork the hohos, make changes and create a Pull Request*
