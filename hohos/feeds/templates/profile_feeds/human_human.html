@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load staticfiles %}   
+{% load i18n %}     
+ 
+{% block title %}hohos - People live {% endblock %}
+
+{% block head %}  
+   
+  <link href="{% static 'css/feeds.css' %}?v=1" rel="stylesheet">
+  <link href="{% static 'css/feeds_profile_extra.css' %}?v=1" rel="stylesheet">  
+  <link href="{% static 'css/feeds_sidebar.css' %}?v=1" rel="stylesheet">
+
+<style type="text/css"> 
+.item img{
+  min-height: 200px;
+  max-height: 100px;
+}
+.item li a { color: green; font-weight: bold; }
+.center {
+  display: flex;   
+  align-items: center;   
+  justify-content: center;      
+}
+</style> 
+<!-- Google Adsense script -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9853052969558014",
+    enable_page_level_ads: true
+  });
+</script>
+
+{% endblock head %}  
+   
+    
+{% block main_fluid %}
+ 
+  <div class="col col-md-2" style="margin-left: 45px;">
+  <br>
+    <span class="center"><button class="btn" style="background-color: #F5DEB3; color: brown; font-weight: bold;"> Top People <i class="fa fa-hand-o-down fa-1x"></i> </button></span>
+  <br>
+
+  {% include 'profile_feeds/trendingPeople.html' %}
+
+      <div>
+        <hr style="border-color: gray; margin-bottom: 3px; margin-top: 13px;">
+        <small style="color: black; font-size: 11px;"><a href="{% url 'about' %}" class="about"> About </a><a href="{% url 'contact' %}" class="contact"> Contact </a><a href="{% url 'privacy' %}" class="privacy"> Privacy </a><a href="{% url 'tos' %}" class="terms"> Terms </a></small>
+        <br style="margin-top: 3px;">
+        <small style="font-size: 11px;">Copyright © 2017 hohos.</small> 
+
+        <hr style="margin-top: 5px; margin-bottom: 5px">
+
+        <button class="btn btn-info btn-sm btn-block inviteblock">Invite Friends</button>
+
+        <hr style="margin-top: 5px; margin-bottom: 7px">
+
+        <form method="post" class="user-invite-form"> {% csrf_token %}
+         <input style="width: 170px;" type="text" name="invite" id="invite" placeholder="friends Email" onclick="show_invite_btn()">
+         <hr style="margin-top: 3px; margin-bottom: 3px">
+         <button class="btn btn-sm btn-primary" style="width: 100px; font-size: 12px; display: none;" id="invitebutton">Invite</button>
+        </form>  
+        </div> <br>
+
+     </div>
+
+
+
+      <div class="col-md-5 col-md-offset-1">
+
+      <ul class="nav nav-tabs center">
+        <li><a href="{% url 'profilefeeds_p_p' %}" class="btn btn-success other">  Product  <i class="fa fa-arrow-right fa-1x"></i>  Product </a></li>
+        <li><a href="{% url 'profilefeeds_h_p' %}" class="btn btn-success other">  Human  <i class="fa fa-arrow-right fa-1x"></i>  Product</a></li>
+        <li><a href="{% url 'profilefeeds_p_h' %}" class="btn btn-success other">  Product  <i class="fa fa-arrow-right fa-1x"></i>  Human  </a></li>    
+      </ul>
+
+        {% if messages %}
+        {% for message in messages %} 
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% endif %}
+
+        <div>
+            {% include 'profile_feeds/open_chat_feed_compose.html' %} 
+            <span class="center">
+            <button class="btn" style="background-color: #F5DEB3; color: brown;">Human <i class="fa fa-arrow-right"></i> Human</button>
+            </span>   
+        </div>
+
+          <ul class="stream">
+            {% for feed in human_human_profile_feeds %}
+              {% include 'feeds/partial_feed_profile.html' with feed=feed %}
+            {% endfor %}
+          </ul>
+
+          <div class="load">
+            <i class="fa fa-spinner fa-spin fa-1x"></i>
+          </div>
+          
+          <form method="get" action="{% url 'load' %}" id="load_feed" autocomplete="off">
+            <input type="hidden" name="feed_source" id="feed_source" value="human_human_profile_feeds">
+            <input type="hidden" name="from_feed" value="{{ from_feed }}">
+            <input type="hidden" name="page" value="{{ page }}">
+          </form>
+          
+        </div>
+
+  <div class="col col-md-3 pull-right" style="max-height:1050px; overflow:scroll;">
+    <ul class="stream_sidebar nostyle"> 
+        <li style="">
+        <span class="center"><button class="btn" style="background-color: #F5DEB3; color: brown; font-weight: bold;"> Active OpenChats H <i class="fa fa-arrows-h fa-lg"></i> H  <i class="fa fa-hand-o-down fa-1x"></i> </button></span>
+        </li> 
+        <br>
+
+      {% for feed in most_active_profile_talks_h_h %}
+        {% include 'profile_feeds/profile_talks_sidebar.html' with feed=feed %}
+      {% endfor %}
+
+        <br>
+        <li style="">
+
+        <span style="color:#008080; font-size: 15px;" class="center">
+        <a href="{% url 'profilefeeds_h_h' %}" type="button" class="btn btn-danger center">See All</a>
+        </span>
+        </li> 
+        <br>
+
+    </ul>
+  </div>
+  
+{% endblock main_fluid %}
+
+
+
+{% block js %}
+
+  <script src="{% static 'js/jquery.bullseye-1.0-min.js' %}"></script> 
+  <script src="{% static 'js/feeds_profile.js' %}"></script>
+
+  <script src="{% static 'js/feeds_profile_extra.js' %}"></script>
+
+<script type="text/javascript">
+  function show_invite_btn(){
+     $("#invitebutton").css('display','block');
+  }
+</script>
+{% endblock js %}
+  

@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %} 
+{% load socialaccount %}
+   
+ 
+{% block title %}
+  {% trans 'The world of strange human behaviour and awesome facial expressions - hohos' %}
+{% endblock %}    
+ 
+  
+{% block head %} 
+  <link href="{% static 'css/cover.css' %}" rel="stylesheet"> 
+
+<style type="text/css">
+ /* http://www.menucool.com/slider/jsImgSlider/images/image-slider-2.jpg*/
+ 
+/*{% static "img/login_cover_new.jpg" %}
+*/ 
+body {
+/*  background: url('https://media.giphy.com/media/11UpunLi2nQzZu/giphy.gif'); 
+*/  /*no-repeat center center fixed;*/
+/*  background-repeat:no-repeat;
+  background-size: cover; */  
+/*  opacity: 0.5;
+  filter: alpha(opacity=50);*/
+  background-color: #008080; 
+} 
+ .greenfield {border-color: green; color: green;}  
+ .greentext {color: green; border-color: green;}
+ .logo:hover {color: green;}
+
+.center {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {  
+  font-size: 3em;
+  font-weight: 200;
+  font-family: Georgia, serif, cursive;
+  color: white;
+/*  text-decoration: bold;
+*/  text-align: center;
+  text-shadow: 1px 1px 0 #333333;
+  line-height: 70px;
+}
+
+.login input { width: 100%; }
+
+small a { color: black; }
+small a:hover { color: black; }
+
+</style>  
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9853052969558014",
+    enable_page_level_ads: true
+  });
+</script>
+{% endblock head %}
+
+{% block body %}
+  <div class="row">
+<!--   <a style="text-decoration:none;" href="{% url 'home' %}">
+  <h1 class="center">
+  <span style="color:red;">Ho</span><span style="color:green;">ho</span><span style="color:blue;">s</span>
+  </h1>
+  </a> -->
+  
+  <div class="row">
+  <div class="col col-md-4 col-md-offset-4">
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <div class="alert alert-danger alert-dismissable center">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{ error }}
+        </div>
+      {% endfor %} 
+    {% endif %}
+    </div>
+    </div>
+
+
+    <div class="col col-md-4 col-md-offset-4">  
+      <a href="{% url 'home' %}"><h1 style="color: white; text-align: center; font-size: 70px; text-shadow: 3px 2px black;" class="center hohoslogo" title="Hope you are awesome. Lets Enter the world of strange Human behaviour & expressions formed naturally">hohos</h1></a>
+
+      <small class="center welcomeback" style="margin-bottom: -17px; color: white;">Welcome back</small>
+      <hr style="border-color:black;">
+
+<!--       <div style="text-align: center;">
+      <div class="fb-like" data-href="https://www.facebook.com/hohosguys/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+      </div> -->
+
+      <br>      
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-4 col-md-offset-4 center">
+      <form method="post" action="{% url 'login' %}" role="form">
+        {% csrf_token %}
+        <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+          <input type="text" class="form-control greenfield" id="username" name="username" placeholder="username" title="Enter Your Username">
+          {% for error in form.username.errors %}
+            <label class="control-label"><span class="whitetext">{{ error }}</span></label>
+          {% endfor %}
+        </div>
+        <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+          <input type="password" class="form-control greenfield" id="password" name="password" placeholder="password" title="Enter Your Password">
+          {% for error in form.password.errors %}
+            <label class="control-label"><span class="whitetext">{{ error }}</span></label>
+          {% endfor %} 
+        </div>
+
+        <div class="form-group center"> 
+        <button type="submit" class="btn btn-primary loginbtn" style="margin-right: 5px; width: 200px; font-size: 16px;" title="Login to Your account">{% trans 'Login' %}</button>
+<!-- 	       <a href="{% url 'signup_human' %}" class="btn btn-primary" style="margin-right: 5px;">{% trans 'Signup' %}</a>
+         <a  href="{% url 'password_reset' %}" class="btn btn-success">{% trans 'Reset Password' %}</a> -->
+        </div>
+        <br>
+        <div class="form-group center">
+         <a href="{% url 'signup_human' %}" class="btn btn-success Signupbtn" style="width: 150px; margin-right: 15px; font-size: 15px;" title="Not on hohos? Signup Now">{% trans 'Signup' %}</a>
+         <a href="{% url 'password_reset' %}" class="btn btn-danger resetpasswordbtn" style="max-width: 150px; font-size: 15px;" title="Forgot Password? Request New one">{% trans 'Reset Password' %}</a>
+        </div>
+      </form>
+    </div> 
+  </div>
+
+      
+  <div class="row">
+      <div class="col col-md-4 col-md-offset-4">
+<!--       <a href="{% url 'home' %}"><h1 style="color: black; text-align: center; font-size: 70px;" class="center">hohos</h1></a>
+
+      <hr style="border-color:black;">
+      <div style="text-align: center;">
+      <div class="fb-like" data-href="https://www.facebook.com/hohosguys/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+      </div>
+
+      <br>
+ -->
+      <hr style="border-color:gray;">
+      
+      <p style="color: white; margin-left: 50px;" class="center">
+      <span style="color: black; margin-right: 10px;">
+      <img src="{% static 'img/homepics/4.jpg' %}" class="img img-responsive" style="max-width: 70px; max-height: 70px;"></span><span class="welcometext">Welcome Guest <br> Hope you express things cool.<br> Try correcting your friends expressions.<br>
+      Invite Your friends on hohos to show their own version of these expressions</span></p>    
+
+        <form method="post" class="user-invite-form center"> {% csrf_token %}
+         <input style="margin-left: 55px" type="text" name="invite" id="invite" placeholder="friends Email">
+         <button class="btn btn-sm btn-info" style="width: 120px; margin-left: 5px; margin-right: 5px; font-size: 14px;" id="invitebutton">Invite</button>
+        </form>
+
+      <hr>
+
+      {% if users_challenges %}
+      <div class="row">
+        {% for feed in users_challenges %}
+        <div class="col col-xs-2  center">
+        <ul style="list-style-type: none;">
+         <a href="{% url 'special_feeds' feed.id %}">
+         <img src="{{feed.post_pic.url}}" class="img img-responsive" style="max-height: 85px; max-width: 85px; margin-right: 10px; margin-left: -10px; hover:focus;">
+         </a>
+          </ul>
+        </div>
+      {% endfor %}
+      </div><br style="margin-bottom: 15px;">
+
+      {% endif %} 
+
+      <button class="btn btn-block btn-sm btn-primary center">Because its awesome to see friends copying our styles</button>
+
+      <br>
+
+      <small style="color: black;" class="center"><a href="{% url 'about' %}">  About | </a><a href="{% url 'contact' %}">  Contact | </a><a href="{% url 'privacy' %}" class="privacy">  Privacy | </a><a href="{% url 'tos' %}" class="terms">  Terms </a></small>
+      <!-- <br style="margin-top: 1px;"> -->
+      <small class="center">Copyright © 2017 hohos. All rights reserved.</small>
+      <br>
+      <a type="button" class="btn btn-info center talkus" style="max-width: 150px; margin-left: 130px;" 
+      href="{% url 'profile' 'hohos' %}" title="Ask any doubt at hohos profile page">  
+      <span class="glyphicon glyphicon-share-alt"></span>Talk to us @hohos</a>
+      <br><br>
+
+    </div>
+
+  </div>
+
+<script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script>
+{% endblock body %}
+
+{% block js %}
+
+<script type="text/javascript">
+  
+  Tipped.create(".loginbtn",{position: 'right'});
+  Tipped.create(".Signupbtn",{position: 'left'});
+  Tipped.create(".resetpasswordbtn",{position: 'right'});
+  // Tipped.create(".hohoslogo",{position : 'top'});
+
+  // Tipped.create("#invite",{position : 'left'});
+  // Tipped.create("#invitebutton",{position : 'topleft'});  
+  Tipped.create(".talkus",{position : 'right'});
+
+  Tipped.create("#username",{position : 'right'});
+  Tipped.create("#password",{position : 'right'});
+
+</script>
+
+<script type="text/javascript">
+$('.welcometext').typeIt({ speed:60, breakLines:false, autoStart:false });
+$('.hohoslogo').typeIt({ cursor: false});
+
+$('.welcomeback').typeIt({ 
+  speed: 90, 
+  autoStart: false,
+  loop : true,
+  loopDelay: 1550,
+});
+
+</script>
+
+{% endblock js %}
+
+
+
+
+
+
+
+<!--         <div class="form-group">
+            {% providers_media_js %}
+            <a class="btn btn-primary" href="{% provider_login_url 'facebook' method='js_sdk' %}"><i class="fa fa-facebook fa-1x fa-fw"></i> continue with facebook</a>
+           
+        </div> -->
+
+
+
+<!--         <div class="form-group">
+          <a  href="{% url 'password_reset' %}" class="btn btn-success greentext" style="color: green; background-color: white">{% trans "Forgot Password, Don't worry!" %}</a>
+        </div> -->
+
+
+
+ <a class="btn btn-danger" href="{% provider_login_url 'google' method='js_sdk' %}"><i class="fa fa-google fa-1x fa-fw"></i> continue with Google</a>

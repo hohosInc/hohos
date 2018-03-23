@@ -1,0 +1,362 @@
+     {% load staticfiles %}
+      {% load i18n %} 
+ 
+{% block head %}
+  <style> 
+  .navbar-fixed-top{
+  margin-bottom: 0px !important;
+  background-color: #008080;
+  min-height: 55px; max-height: 55px; 
+  margin-top: -5px;
+  }
+
+
+.navbar-brand { border-bottom-color: black; border-bottom-width: 2px;  }
+
+ nav li:hover{
+  cursor: pointer;   
+  background-color: #E0FFFF; #2277AA    A020F0 
+}
+
+
+
+
+/*to make notification popover fixed */
+.popover {
+  position: fixed;
+}
+
+.badge {  
+  z-index: -1; 
+  margin-left: -4px;
+}
+.mycolor{color: #008080;}
+
+/* searchusers */
+
+
+.typeahead, .tt-query, .tt-hint {
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  font-size: 1.2em;
+  height: 35px;
+  line-height: 35px;
+  outline: medium none;
+  padding: 4px 12px;
+  width: 150px;
+}
+.typeahead {
+  background-color: #FFFFFF;
+}
+.typeahead:focus {
+  border: 2px solid #0097CF;
+}
+.tt-query {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.tt-hint {
+  color: #999999;
+}
+
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 5px;
+  padding: 8px 0;
+  width: 350px;
+  overflow:scroll;
+  max-height: 400px;
+}
+.tt-suggestion {
+  font-size: 1em;
+  line-height: 20px;
+  padding: 3px 20px;
+  color: #008080;
+}
+.tt-suggestion { cursor: pointer; }
+
+.tt-suggestion.tt-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+
+#search input[type="text"] {
+    /*background: url("{% static 'img/search.png' %}") no-repeat 10px 6px #fcfcfc;*/
+    border: 1px solid #d1d1d1;
+    font: 14px Arial,Helvetica,Sans-serif ;
+    color: gray; #bebebe;
+    width: 180px;
+    padding: 6px 15px 6px 35px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+/*    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);*/
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    background-color: white;
+    }
+
+
+#search input[type="text"]:focus {
+    width: 200px;
+    }
+
+.small_pic {
+  max-width:  40px; 
+  min-width:  40px;
+  max-height: 40px; 
+  min-height: 40px;
+}
+
+  </style>
+{% endblock %}
+
+
+      <header> 
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="container"> 
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button> 
+              <a class="navbar-brand btn" href="{% url 'introho' %}" style="font-family: Georgia, serif, cursive; font-size:25px; color: white; text-shadow:1px 1px black;"><!-- <span style="background-color:red; color:white;">Ho</span><span style="background-color:lightgreen; color:white;">ho</span><span style="background-color:blue; color:white;">s</span> -->
+              hohos
+              </a>
+            </div>
+ 
+            <div class="collapse navbar-collapse" id="menu">
+              <ul class="nav navbar-nav">
+                {% if request.user.is_authenticated %} 
+
+                <li><a href="{% url 'feeds' %}" style="font-weight:bold; font-size:16px; color:black;" class="btn response mainitems">{% trans 'Response' %}</a></li>
+                <li><a href="{% url 'challenge_feeds' %}" style="font-size:16px; color:black;" class="btn challenge mainitems">{% trans 'Challenge' %}</a></li>
+              <li><a href="{% url 'profilefeeds_h_h' %}" style="font-size:16px; color:black;" class="btn openchat mainitems">{% trans 'OpenChat' %}</a></li>
+              {% else %}
+              <li><a href="{% url 'about' %}" style="color:white; font-size:17px;" class="wearehere mainitems">{% trans 'We are here' %}</a></li>
+              {% endif %}
+
+              </ul>
+
+{% if request.user.is_authenticated %}
+  <a href="{% url 'profile' request.user.username %}">
+    <li class="pull-right" style="list-style:none; padding-top:7px;">
+    <img href="{% url 'profile' request.user.username %}" src="{{request.user.profile.get_picture}}" class="img img-responsive img-rounded small_pic" style="padding: 0px;">
+    </li>
+  </a>
+    <li class="pull-right" style="list-style:none; padding-top:13px;">
+    <a href="#" id="notifications" data-container="body" data-toggle="popover" data-placement="bottom" title="Notifications">
+    <span class="glyphicon glyphicon-bell"><span class="badge" style="color: white;"></span></span>
+    </a>
+    </li>
+{% endif %}
+
+ 
+{% if request.user.is_authenticated %}
+
+<div class="btn-group pull-right" style="margin-top:10px;">
+
+  {% if request.user.profile.is_product %}
+  <a href="{% url 'profile' user.username %}" class="btn btn-danger" style="color: white; font-weight:bold;">{{ user.profile.get_screen_name }}</a>
+
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+
+  {% else %}
+  <a href="{% url 'profile' user.username %}" class="btn btn-success" style="color: white; font-weight:bold;">{{ user.profile.get_screen_name }}</a>
+  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  
+  {% endif %}
+
+  <ul class="dropdown-menu">
+    <!-- <li><a href="#">Notifications</a></li> -->
+    <li><a href="{% url 'profile_talks_by_page_user' user.username %}"><i class="fa fa-user fa-1x fa-fw mycolor"></i> my Activities</a></li>
+
+    <li><a href="{% url 'challenges_for_page_user' user.username %}"><i class="fa fa-user fa-1x fa-fw mycolor"></i> challenges for you</a></li>
+
+    {% if request.user.profile.is_product %}
+    <li><a href="{% url 'settings_products' %}"><i class="fa fa-cog fa-1x fa-fw mycolor"></i>
+     Settings</a></li>
+    {% else %}
+    <li><a href="{% url 'settings_human' %}"><i class="fa fa-cog fa-1x fa-fw mycolor"></i>
+    Settings</a></li>
+    {% endif %}
+
+    <li><a href="{% url 'logout' %}">
+    <i class="fa fa-sign-out fa-1x fa-fw mycolor"></i> Logout</a>
+    </li>
+
+    <li><a href="{% url 'about' %}">
+    <i class="fa fa-superpowers fa-1x fa-fw mycolor"></i> About hohos</a>
+    </li>
+
+    <li role="separator" class="divider mycolor"></li>
+    <li><a href="{% url 'contact' %}">
+    <i class=" fa fa-question-circle fa-fw"></i> Reach Us</a>
+    </li>
+
+    {% if request.user.is_staff or request.user.is_superuser %}
+
+    <li><a href="{% url 'network' %}"><i class="fa fa-users fa-1x fa-fw mycolor"></i>  See hohoss</a></li> 
+<!--     <li><a href=""><i class="fa fa-users fa-1x fa-fw mycolor"></i>  Invite old users </a></li> 
+ -->
+    <!-- <li><a href="{% url 'ajax:basics' %}">Testing</a></li> -->
+    {% endif %}
+  </ul>
+</div>
+{% else %}
+<div class="btn-group pull-right" style="margin-top:8px; margin-left:-10px;">
+  <a href="{% url 'signup_human' %}" class="btn btn-success" style="color: white">SignUp</a>
+  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only"> 
+
+      Toggle Dropdown</span>
+  </button> 
+  <ul class="dropdown-menu">
+    <!-- <li><a href="#">Notifications</a></li> -->
+<!--     <li><a href="#">my Activities</a></li>
+    <li><a href="#">Settings</a></li> -->
+    <li><a href="{% url 'about' %}">
+    <i class="fa fa-superpowers fa-1x fa-fw mycolor"></i>  About hohos</a>
+    </li>
+    <li><a href="{% url 'contact' %}">
+    <i class=" fa fa-question-circle fa-fw"></i> Reach Us</a>
+    </li>
+
+  </ul>
+</div>
+{% endif %}
+
+  {% if not request.user.is_authenticated and not "/signup/" in request.get_full_path %} 
+            <form class='navbar-form navbar-right' method='POST' action='{% url "login" %}' style="margin-right:-6px;">  
+            {% csrf_token %}
+              <div class='form-group'>
+                  <input style="margin-right:-6px;" type='text' class='form-control' name='username' placeholder='Username' /> 
+              </div>
+              <div class='form-group'>
+                  <input style="margin-right:-6px;" type='password' class='form-control' name='password' placeholder='Password' />
+              </div>
+              <button type='submit' class='btn btn-default'>Login</button>
+          </form>
+          {% else %}
+
+              <div class="pull-right" style="margin-right:-16px;">
+              {% if not hide_search %}
+                <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}" id="search">
+                  <div class="input-group">
+                    <input type="text" class="form-control typeahead" name="q" id="to" placeholder="Search">
+<!--                      <span class="input-group-btn">
+                      <button type="submit" class="btn btn-info" style="border-radius: 30%;"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>  -->
+                  </div>
+                </form>
+              {% endif %}
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+        </nav>
+      </header>
+
+
+{% block js %}
+
+<script type="text/javascript">
+  
+$(function () {
+
+  var substringMatcher = function(strs) {
+    return function findMatches(q, cb) {
+      var matches, substringRegex;
+      matches = [];
+      substrRegex = new RegExp(q, 'i');
+      $.each(strs, function(i, str) {
+        if (substrRegex.test(str)) {
+          matches.push({ value: str });
+        }
+      });
+      cb(matches);
+    };
+  };
+
+  $.ajax({
+    url: '/searchusers/',
+    cache: false,  
+    success: function (data) { 
+      $('#to').typeahead({ 
+        hint: false,
+        highlight: true,
+        minLength: 0,
+      },
+      {
+        name: 'data',
+        displayKey: 'value',
+        source: substringMatcher(data)
+      }).on('typeahead:closed', function (obj, datum, name) {
+          $(obj.currentTarget).val("");
+      });
+    }
+  }); 
+
+});
+
+</script>
+
+{% endblock js %}
+
+
+<!-- 
+/*nav li.mainitems:hover {  background-color: white; }*/
+
+/*{% if "feeds/openchat/" in request.get_full_path %}
+
+ nav li:hover{
+  cursor: pointer;    
+  background-color: green;  #008B5E 
+}
+.openchat { background-color: green; }
+
+{% elif "/challenge/" in request.get_full_path %} 
+ nav li:hover{   
+  cursor: pointer;    
+  background-color: purple;  #008B5E 
+}
+.challenge { background-color: purple; }
+
+{% elif "/feeds/" in request.get_full_path %}
+ nav li:hover{
+  cursor: pointer;   
+  background-color: #2277AA; #2277AA    A020F0 
+}
+.response { background-color: #2277AA; }
+
+{% else %}*/
+.navbar-brand { border-bottom-color: black; border-bottom-width: 2px;  }
+
+ nav li:hover{
+  cursor: pointer;   
+  background-color: #E0FFFF; #2277AA    A020F0 
+}
+
+/*{% endif %} */
+ -->

@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load staticfiles %}   
+{% load i18n %} 
+ 
+
+{% block title %}
+  {% if request.user == page_user %}
+   hohos -  Everything you share at hohos
+  {% else %}
+   hohos -  Everything {{ page_user.profile.get_screen_name }} share at hohos 
+  {% endif %}
+{% endblock %}
+   
+
+{% block head %}   
+  <link href="{% static 'css/feeds.css' %}?v=1" rel="stylesheet">
+  <script src="{% static 'js/jquery.bullseye-1.0-min.js' %}"></script>
+  <script src="{% static 'js/feeds.js' %}?v=1"></script>
+<style type="text/css">
+.btn-compose,.my {background-color:#008080;}
+.mytext{color:#008080;}   
+.greentext {color: #2ABE5E}
+.white {color: white;} 
+.bottom_gap {margin-bottom: 7px;}
+.center {margin-left: 50px;} 
+.redtext{color: red}
+.aboutuser {margin-top: 20px;}
+.aboutuser li {color: #008080; list-style: none; padding:3px; margin-left: -35px;}
+.aboutuser h3{color: green; margin-left: 0px;}
+
+ul.stream li div.feed-container:hover{
+  cursor: pointer;
+  background-color: #f5f8fa;
+} 
+
+.like{ font-weight: bold; font-size:13px; color: gray; }
+.unlike { font-weight: bold; color: #008080; font-size:12px; }
+.post a { text-decoration: none; }
+.post a:hover { color: #008080; }
+
+</style>
+{% endblock head %}  
+  
+
+{% block main %}
+ 
+<div class="row">
+    <div class="col-md-4 user-profile">
+        <a href="#">
+        <img src="{{page_user.profile.get_picture}}" class="img img-responsive">
+        </a> 
+ 
+        <table style="margin-top:7px; margin-bottom:7px; margin-left:50px;">
+        <tr>
+        <th colspan="5" align="left">
+      {% if page_user.profile.likes %}
+        <button type="button" class="btn btn-danger" title="Like {{ page_user.profile.get_screen_name }} on live profile to share your feeling!!" style="color:pink;">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likers' %} {{ page_user.profile.likes}}
+        </button> 
+      {% else %}
+      {% endif %}
+
+      {% if page_user.profile.likes_to %}
+        <button type="button" class="btn btn-success" title="{{page_user}} is liking {{ page_user.profile.likes_to }} people!">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likes to' %} {{ page_user.profile.likes_to }}
+        </button>
+      {% else %}
+        <button type="button" class="btn btn-success" title="{{page_user}} is liking {{ page_user.profile.likes_to }} people!">
+        <span  class="glyphicon glyphicon-heart"></span> 
+        {% trans 'Likes to no one' %} 
+        </button>
+      {% endif %}
+        </th>
+        </tr>
+        </table>
+
+
+    <ul class="aboutuser">
+      {% include 'core/about_user.html' %}
+    </ul> 
+
+  </div>
+
+
+    <div class="col-md-6">
+
+        {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% endif %}
+        
+        <div style="margin-top:25px;" class="page-header">    
+
+          {% if request.user == page_user %}
+          <a href="{% url 'profile' page_user.username %}" class="btn my white center" title="{% trans 'Go to your live profile' %}">
+          <span class="glyphicon glyphicon-share-alt"></span> 
+          {% trans 'See what people are talking about you hooho!! ' %}
+          </a>
+          {% else %}
+          <a href="{% url 'profile' page_user.username %}" class="btn my white center" title="{% trans 'Go to live profile of ' %}{{ page_user.profile.get_screen_name }}">
+          <span class="glyphicon glyphicon-share-alt"></span> 
+          {% trans 'Share your feelings about ' %}{{ page_user.username }}
+          </a>
+          {% endif %}
+        </div><br>
+          
+
+
+
+  <ul class="nav nav-tabs ">
+    <li><a data-toggle="tab" href="#profile_talks"> Profile Talks </a></li>
+    <li class="active"><a data-toggle="tab" href="#challenges_by">  Challenges by {{page_user.username}} </a></li>
+    <li><a data-toggle="tab" href="#responses_by">  Responses by {{page_user.username}} </a></li>
+
+  </ul>
+
+
+
+  <div class="tab-content">
+
+  <div id="profile_talks" class="tab-pane fade ">
+  {% include 'page_user_feeds/page_user_profile_talks.html' %}
+  </div>
+
+  <div id="challenges_by" class="tab-pane fade in active">
+  {% include 'page_user_feeds/challenges_by_page_user.html' %}
+  </div>
+
+  <div id="responses_by" class="tab-pane fade">
+  {% include 'page_user_feeds/responses_by_page_user.html' %}
+  </div>  
+
+ </div>
+
+
+        </div>
+      </div>
+ 
+{% endblock main %}
+
+
+
+{% block js %}
+
+<script type="text/javascript">
+  
+  var load_feeds = function () {
+    if (!$("#load_feed").hasClass("no-more-feeds")) {
+      var feed_source = $("#feed_source").val();
+      var page = $("#load_feed input[name='page']").val();
+      var next_page = parseInt($("#load_feed input[name='page']").val()) + 1;
+      $("#load_feed input[name='page']").val(next_page);
+      $.ajax({
+        url: '/feeds/load/',
+        data: $("#load_feed").serialize(),
+        cache: false,
+        beforeSend: function () {
+          $(".load").show();
+        },
+        success: function (data) {
+          if (data.length > 0) {
+            if(feed_source == "profile_talks_by_page_user"){
+              $("#profile_talks ul.stream").append(data);
+            }
+            else if(feed_source == "challenges_by_page_user"){ 
+              $("#challenges_by ul.stream").append(data);
+            }
+            else if(feed_source == "responses_by_page_user"){ 
+              $("#responses_by ul.stream").append(data);
+            } 
+          }
+          else {
+            $("#load_feed").addClass("no-more-feeds");
+          }
+        },
+        complete: function () {
+          $(".load").hide();
+        }
+      });
+    } 
+  };
+
+  $("#load_feed").bind("enterviewport", load_feeds).bullseye();  
+
+</script>
+
+{% endblock js %}

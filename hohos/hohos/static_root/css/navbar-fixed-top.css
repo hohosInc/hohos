@@ -1,0 +1,40 @@
+/*body {
+  min-height: 1000px;
+  padding-top: 0px;
+}
+
+.navbar-fixed-top {
+	margin-bottom:  19px;
+	background-color: lightblue;
+	border-color: blue;
+	padding-top: 0px;
+}
+
+.navbar-default .navbar-brand{
+	color: blue;
+}
+
+.navbar-default .navbar-brand:hover {
+	color: white;
+}
+.navbar-default .navbar-brand<li> a:hover {
+	color: white;
+}
+.navbar-default .navbar-toggle {
+	color: transparent !important;
+}
+
+.navbar-toggle:hover {
+	background-color: white !important;
+}
+
+.navbar-toggle {
+	background-color: grey !important;
+}
+*/
+
+
+.navbar-fixed-top {
+  margin-bottom: 0px !important;
+  background-color: #008080;
+}

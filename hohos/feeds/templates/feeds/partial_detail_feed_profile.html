@@ -1,0 +1,197 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load humanize %}   
+     
+   {% block head %} 
+
+   <style type="text/css">
+.likers, .commented {color: gray; padding-right: 10px;}
+.likers a {color: #008080;}
+ .green { 
+    color: #008080;
+ }
+/* .like .heart{ 
+  color: green;  
+ } */
+   </style>    
+
+<script type="text/javascript">
+ $("#profile-likes").on("click", ".like", function () {
+    // var li = $(this).closest("li");
+    var item = $(this).closest("div");
+    $.ajax({
+      url: '/feeds/profile_like/',
+      data: $('#like-form').serialize(),
+      type: 'post',
+      cache: false,
+      success: function (data) {
+        if ($(".like", item).hasClass("unlike")) {
+          $(".like", item).removeClass("unlike");
+          $(".like .text", item).text("Like");
+          $(".btn-compose").hide('explode', {percent:200, direction:'horizontal'}, 2000);
+          // $("#suggest").show();
+          // $(".like .red", li).toggleClass('red');
+          // $(".like .red", li).css('color','red');
+        }
+        else {
+          $(".like", item).addClass("unlike");
+          $(".like .text", item).text("Unlike");
+          $(".btn-compose").show('explode', {percent:200, direction:'horizontal'}, 2000);
+          // $("#suggest").hide();
+          // $(".like .green", li).toggleClass('green');
+          // $(".like .green", li).css('color','green');
+        }
+        $(".like .like-count", item).text(data);
+      }
+    }); 
+    return false;
+  });
+
+</script>
+
+   {% endblock %}  
+
+<li feed-id="{{ feed.pk }}" csrf="{{ csrf_token }}">
+  <div class="feed-container">
+    <a href="{% url 'profile' feed.user.username %}">
+      <img src="{{ feed.user.profile.get_picture }}" class="user" style="max-width:60px; max-height:60px;">
+ 
+    </a>
+    <div class="post">  
+      {% if feed.user == user %}
+               <span class="dropdown pull-right">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: gray;"><b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                  <span class="pull-left glyphicon glyphicon-remove remove-feed"> Remove opinion</span>
+                  </ul>
+              </span>
+      {% endif %}
+
+      <h3><a  href="{% url 'profile' feed.user.username %}" class="userinfotip">{{ feed.user.profile.get_screen_name }}</a>
+      <small>{{ feed.date|naturaltime }}</small>
+      </h3>
+      <p style="margin-bottom:7px; margin-top:7px color:#008080">{{ feed.linkfy_post|safe|linebreaksbr }}</p>
+      <p>
+      {% if feed.post_pic %}
+    <a href="{% url 'feeds' feed.id %}">
+    <img src="{{feed.post_pic.url}}" class="img img-responsive" title="See the whole detail about this style!">
+    </a>     
+    {% endif %}
+      </p>
+      
+{% if not request.user.is_anonymous and not "/introho/" in request.get_full_path %}
+
+    <div  style="margin-bottom:7px; margin-top:7px" class="interaction">
+       
+        {% if user in feed.get_likers %}
+          <a style="color:gray; font-size:12px;" href="#" class="like unlike">
+            <span class="fa fa-thumbs-up fa-1x gray"></span>
+            <span class="text">{% trans 'Liked' %}</span>
+          </a>
+        {% else %}
+          <a style="color:gray; font-size:12px;" href="#" class="like">
+            <span class="fa fa-thumbs-up fa-1x  gray"></span>
+            <span class="text">{% trans 'Like' %}</span>
+          </a>
+        {% endif %}
+        <a style="color:gray; font-size:12px;" href="#" class="comment">
+          <i class="fa fa-comments fa-1x gray" aria-hidden="true"></i>
+          {% trans 'Comments' %}
+        </a>
+      </div>
+      <div class="comments">
+        <form role="form" method="post" action="{{ comment }}" onsubmit="return false">
+          {% csrf_token %}
+          <input type="hidden" name="feed" value="{{ feed.pk }}">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" placeholder="{% trans 'Write a comment...' %}" name="post" maxlength="255">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-info btn-sm pull-right commentbtn">Comment</button>
+            </span>
+          </div>
+        </form>
+        <ol class="clearfix">
+          {% comment %} Place holder to load feed comments {% endcomment %}
+        </ol>
+      </div>
+
+   {% if feed.likes or feeds.comments %}
+      <span class="likers">
+      {% if feed.likes %} {{feed.likes}} people Liked</span>
+      {% endif %}
+      {% if feed.comments %}
+      <span class="commented">{{feed.comments}} Commented</span>
+      {% endif %}
+      
+
+<hr>      
+<span class="likers center">
+
+<i class="fa fa-share fa-1x" style="margin-right:9px;"></i>
+
+<i class="fa fa-facebook fa-1x fa-fw"></i>
+<a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" style="margin-right:12px;">
+          Facebook 
+</a>
+<i class="fa fa-twitter fa-1x fa-fw"></i>
+<a href="https://twitter.com/home?status={{share_string}}%20{{request.build_absolute_uri}}">
+Twitter 
+</a>
+
+</span>
+
+
+      <br style="margin-top:5px; margin-bottom:8px;" > 
+       <hr style="border-color:lightgray; margin-top:7px; margin-bottom:10px;">
+
+   {% for liker in feed.get_likers %}
+
+  <div class="col-md-4" style="max-height:250px; overflow:scroll;">
+    <div class="thumbnail">
+      
+      <table>
+        <tr>
+          <th>
+            <a href="{% url 'profile' liker.username %}" style="color:#008080; font-weight:bold;">{{liker.profile.get_screen_name}}</a>
+          </th>
+          <th>
+
+          </th>
+        </tr>
+      </table>
+
+      <a href="{% url 'profile' liker.username %}"><img src="{{liker.profile.get_picture}}" alt="image"></a>
+      <div class="caption">
+       {% if liker.profile.status %} <small style="font-weight:bold; margin-right:10px;">status</small><small style="color:#008080;">{{liker.profile.status}}</small>{% endif %}
+        <table>
+          <tr>
+            <th>
+              {% if liker.profile.likes %}<a href="#" class="btn btn-danger btn-xs" role="button">Likers {{liker.profile.likes}}</a>{% endif %}
+            </th>
+            <th>
+              {% if liker.profile.likes_to %}<a href="#" class="btn btn-success btn-xs" role="button">Likes to {{liker.profile.likes_to}}</a>{% endif %}
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+        {% endfor %}
+      {% endif %}
+
+{% else %}
+{% endif %}
+    
+    </div>
+  </div>
+</li>
+
+
+
+{% block js %}
+
+  <script src="{% static 'js/feeds_profile.js' %}"></script>
+
+{% endblock %}
+ 

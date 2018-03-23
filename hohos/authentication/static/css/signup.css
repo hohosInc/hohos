@@ -1,0 +1,46 @@
+body {
+  background-color: #008080;
+}
+
+.logo {
+  margin: 0;
+  font-size: 3em; 
+  font-weight: 200;
+  font-family: Georgia, serif, cursive;
+  text-align: center;
+  text-shadow: white;
+  line-height: 70px;
+} 
+      
+.logo a {
+  color: white;
+/*  margin-top: 100px;*/
+}
+
+.logo a:hover, .logo a:focus {
+  color: green;
+  text-decoration: none;
+}
+
+.signup {
+/*  background-color: white;
+*/  width: 70%;
+  border-radius: 7px;
+  margin: 10px auto 0;
+}
+
+.signup {
+  padding: 10px 20px;
+}
+
+.signup h2 {
+  margin-bottom: 100px;
+  color: white;
+}
+.signup form {
+  margin-top: 15px;
+}
+
+.signup h2 {
+  margin: 0;
+}

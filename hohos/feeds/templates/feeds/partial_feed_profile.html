@@ -1,0 +1,179 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load humanize %}   
+   
+{% block head %}
+
+<style type="text/css">  
+ .green {
+    color: #008080; 
+ }  
+
+ul.stream li div.feed-container:hover{ 
+  cursor: pointer;
+  background-color: #f5f8fa;   
+} 
+  
+/*li .post a { font-size: 15px; }*/
+.like{ font-weight: bold; color: gray; }
+.unlike { font-weight: bold; color: #008080; }
+
+.text { font-size:12px; }
+
+</style>    
+ 
+{% endblock %}   
+  
+ 
+<li feed-id="{{ feed.pk }}" csrf="{{ csrf_token }}" profile-pk="{{feed.profile_pk}}" style="background-color:white;" class="hoverli"> 
+ 
+  <div class="feed-container">
+
+    <div class="center">
+    <a href="{% url 'profile' feed.user.username %}">
+      <img src="{{ feed.user.profile.get_picture }}" class="user center small_pic" title="{{feed.user.profile.get_screen_name}}">
+    </a>
+    {% if feed.to_user and not feed.to_user == feed.user %}
+    <a href="{% url 'profile' feed.to_user.username %}" style="margin-left: -5px;">
+      <img src="{{ feed.to_user.profile.get_picture }}" class="user center small_pic" title="{{feed.to_user.profile.get_screen_name}}">
+    </a>
+    {% endif %}    
+    </div>
+    <a href="{% url 'profilefeeds_h_h' %}" class="center" style="text-decoration: none; margin-top: 3px;"> <span style="background-color: #A9A9A9; font-size: 13px; color: black; border-radius: 7px;" class="profiletalktip" title="{% if not feed.user == feed.to_user %}OpenChat between {{feed.user.username}} & {{feed.to_user.username}} {% endif %}"> Profile Talks</span>
+    </a>  
+    <br>
+
+    <div class="post">
+      {% if feed.user == user or request.user.is_superuser %}
+        <span class="glyphicon glyphicon-remove remove-feed" title="{% trans 'Click to remove this feed' %}"></span>
+      {% endif %}
+
+      <h3><a href="{% url 'profile' feed.user.username %}" class="userinfotip" title="{% if feed.user.profile.status %}{{feed.user.profile.status}}{% endif %}">{{ feed.user.username }}</a>
+
+      <small>{{ feed.date|naturaltime }}</small>
+      <small><i class="fa fa-arrow-right" aria-hidden="true"></i></small>
+      {% if feed.to_user and feed.to_user != feed.user %}
+      
+     <a href="{% url 'profile' feed.to_user.username %}" class="userinfotip" title="{% if feed.to_user.profile.status %}{{feed.to_user.profile.status}}{% endif %}">{{ feed.to_user.username }}</a>
+
+      {% elif feed.to_user %}  
+      <a href="{% url 'profile' feed.to_user.username %}">own </a>
+      {% endif %}
+      </h3>
+      <p style="color:#184334; margin-bottom:7px; margin-top:15px;">{{ feed.linkfy_post|safe|linebreaksbr }}</p>
+      <p>
+      </p>
+{% if not request.user.is_anonymous %} 
+       
+      <div class="interaction">
+
+      {% if feed.likes or feeds.comments %}
+      <span class="likers">
+      {% if feed.likes %}
+      <a class="agreedti"p href="{% url 'feeds' feed.id %}" style="color:gray;" title="{{feed.likes}} people agree with {{feed.user.username}}">{{feed.likes}} Liked</a>
+      </span>
+      {% endif %}
+      {% if feed.comments %}
+      <a class="commentedtip" href="{% url 'feeds' feed.id %}" style="color:gray;"><span class="tcomments">{{feed.comments}}</span> Commented</span></a>
+      {% endif %}
+      <br style="margin-top:5px; margin-bottom:3px;" >
+      {% endif %}
+<tr>
+<td>
+<!--         {% if user in feed.get_likers %}
+          <a style="color:gray; font-size:12px;" href="#" class="like unlike">
+            <span class="fa fa-thumbs-up fa-1x gray"></span>
+            <span class="text">{% trans 'Liked' %}</span>
+          </a>
+        {% else %}
+          <a style="color:gray; font-size:12px;" href="#" class="like">
+            <span class="fa fa-thumbs-up fa-1x  gray"></span>
+            <span class="text">{% trans 'Like' %}</span>
+          </a>
+        {% endif %}
+        <a style="color:gray; font-size:12px;" href="#" class="comment">
+          <i class="fa fa-comments fa-1x gray" aria-hidden="true"></i>
+          {% trans 'Comments' %}
+        </a> -->
+        {% if user in feed.get_likers %}
+          <a href="#" class="like unlike">
+            <span class="fa fa-thumbs-up fa-1x"></span>
+            <span class="text">{% trans 'Liked' %}</span>
+          </a>
+        {% else %}
+          <a href="#" class="like">
+            <span class="fa fa-thumbs-up fa-1x"></span>
+            <span class="text">{% trans 'Like' %}</span>
+          </a>
+        {% endif %}
+        <a style="color:gray; font-size:12px;" href="#" class="comment">
+          <i class="fa fa-comments fa-1x gray" aria-hidden="true"></i>
+          {% trans 'Comments' %}
+        </a>
+</td>
+<td>
+<span class="pull-right">
+<span style="font-size: 10px; color: gray;">Share</span>  
+
+<a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" style="margin-right:4px; margin-left: 6px;">
+<i class="fa fa-facebook fa-1.5x fa-fw"></i>
+</a> 
+<a href="https://twitter.com/home?status={{share_string}}%20{{request.build_absolute_uri}}">
+<i class="fa fa-twitter fa-1.5x fa-fw"></i>
+    </a>
+  </span>
+  </td>
+</tr> 
+      </div>
+      <div class="comments">
+        <form role="form" method="post" action="{{ comment }}" onsubmit="return false">
+          {% csrf_token %}
+          <input type="hidden" name="feed" value="{{ feed.pk }}">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" placeholder="{% trans 'Write a comment...' %}" name="post" maxlength="255">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-info btn-sm pull-right commentbtn">Comment</button>
+            </span>
+          </div>
+        </form>
+        <ol class="clearfix">
+          {% comment %} Place holder to load feed comments {% endcomment %}
+        </ol>
+      </div>
+
+{% else %}  {# if user is not authenticted redirect them to login #}
+
+      <h3 style="margin-top:3px;">
+      {% if feed.likes %}  
+      <i class="fa fa-thumbs-up fa-1x  green"></i>
+      <a href="{% url 'signup_human' %}">
+      <small class="agreedtip" title="{{feed.likes}} people agree with {{feed.user.username}}"> {{ feed.likes }} Agreed</small>
+      </a> 
+      {% endif %}
+      {% if feed.comments %}
+      <a href="{% url 'signup_human' %}">
+      <small class="commentedtip">{{ feed.comments }} Commented</small>
+      </a>
+      {% endif %}
+      </h3>
+
+{% endif %}
+
+    </div>
+  </div>
+
+  <hr style="border-color:lightgray; margin-top:20px; margin-bottom:-8px;">
+</li>
+
+{% block js %}
+
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+    Tipped.create('.user',{position:'top'});
+    Tipped.create('.profiletalktip',{position:'bottom'});
+  });
+
+</script>
+
+{% endblock js %}
