@@ -36,8 +36,9 @@ Clone the repo and follow these steps
 
 4. **Sensitive Information**
      
-       There are some variables which are coming from either environment variables or from a file sensitive.py 
-       so you just create this file and pust those variables in that file or you can use environment variables too. 
+       There are some variables which are coming from either environment variables 
+       or from a file sensitive.py so you just create this file and pust those variables 
+       in that file or you can use environment variables too. 
 
        #SENSITIVE DATABASE INFORMATION
        DB_NAME='xyz'
