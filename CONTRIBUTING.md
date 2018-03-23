@@ -25,3 +25,10 @@ Thank you for your suggestion!
 ### Updating your PR
 
 A lot of times, making a PR adhere to the standards above can be difficult. If the maintainers notice anything that we'd like changed, we'll ask you to edit your PR before we merge it. If you're not sure how to do that, [here is a guide](https://github.com/RichardLitt/docs/blob/master/amending-a-commit-guide.md) on the different ways you can update your PR so that we can merge it.
+
+
+**Working on your first Pull Request?** <br>
+You can learn how from this *free* series <br>
+[How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
+
+Happy Coding :)
