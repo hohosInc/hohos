@@ -21,27 +21,29 @@ Visit hohos - [hohos.tech](http://hohos.tech)
 <h3>How to run hohos locally ?</h3> <hr>
       
       
-Follow these steps 
+Clone the repo and follow these steps 
 
-1. Install Requirements
+       Clone - git clone https://github.com/dbads/hohos.git
+
+1. **Install Requirements**
    
        sudo apt-get install python3
        sudo apt-get install python3-pip
        pip3 install -r requrements.txt
 
-2. Database configuration
+2. **Database configuration**
 
        If you use postgresql then
        Change name of databse, db user, db password, localhost, and you can leave port blank
 
        If you want to use sqlite3 then just uncomment the sqlite configuration.
 
-3. Configuring Settings.py file 
+3. **Configuring Settings.py file** 
 
        you can make DEBUG=True while you are working locally
        ALLOWED_HOSTS=['*'] in local
 
-4. Sensitive Information
+4. **Sensitive Information**
      
        There are some variables which are coming from either environment variables or from a file sensitive.py 
        so you just create this file and pust those variables in that file or you can use environment variables too. 
@@ -59,7 +61,7 @@ Follow these steps
        EMAIL_HOST_PASSWORD='your email password'
        EMAIL_PORT='587'
 
-5. Now Use the following commands to build the required tables
+5. **Now Use the following commands to build the required tables**
 
        python3 manage.py migrate
        python3 manage.py makemigrations
@@ -67,12 +69,12 @@ Follow these steps
        python3 manage.py createsuperuser to make a super user
        visit ip:domain/admin  to see admin panel
        
-6. Commands to run server
+6. **Commands to run server**
 
        python3 manage.py runserver <ip>:<port>
        // default port is 8000 and default address is 127.0.0.1
        ctrl+c   to stop the server
        
        
-
+*Want to add some feature in hohos, fork the hohos, make changes and create a Pull Request*
        
