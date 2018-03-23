@@ -1,5 +1,4 @@
-<h2 align="center">hohos</h2> <hr>
-
+<h2 align="center">hohos</h2> 
 <!-- [![Dependency Status](https://david-dm.org/dbads/hohos/status.svg?style=flat)](https://david-dm.org/dbads/hohos) [![Build Status](https://travis-ci.org/dbads/hohos.svg?branch=master)](https://travis-ci.org/dbads/hohos) [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) -->
 
 <!--
@@ -7,13 +6,16 @@
 <a href="https://github.com/dbads/hohos"><img src="https://camo.githubusercontent.com/30fd882638a1573cd130a3021502e63038ddf342/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f41626865792f566973696f6e2e737667" alt="GitHub Stars" data-canonical-src="https://img.shields.io/github/stars/dbads/hohos.svg" style="max-width:100%;"></a>
 <a href="https://github.com/dbads/hohos"><img src="https://camo.githubusercontent.com/78edf0eec50e3e0167a1169cd1a262e55f849a5a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f76657273696f6e2d312e312d677265656e2e737667" alt="Current Version" data-canonical-src="https://img.shields.io/badge/version-1.0-green.svg" style="max-width:100%;">
  -->
-[![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby)
-<!-- [![star this repo](http://githubbadges.com/star.svg?user=dbads&repo=github-badges)](http://github.com/dbads/hohos)
+ <!-- [![star this repo](http://githubbadges.com/star.svg?user=dbads&repo=github-badges)](http://github.com/dbads/hohos)
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges)](http://github.com/dbads/hohos/fork)
 [![star this repo](http://githubbadges.com/star.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos)
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos/fork) -->
 
+<p align="center">
+[![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) <br>
 Visit hohos - [hohos.tech](http://hohos.tech)
+</p>
+
 
 <h3 align="center">How to run hohos locally ?</h3> <hr>
       
