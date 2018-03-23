@@ -11,10 +11,11 @@
 [![star this repo](http://githubbadges.com/star.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos)
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos/fork) -->
 
-<p align="center">
+
 [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) <br>
+
 Visit hohos - [hohos.tech](http://hohos.tech)
-</p>
+
 
 
 <h3 align="center">How to run hohos locally ?</h3> <hr>
