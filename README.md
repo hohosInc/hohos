@@ -1,3 +1,5 @@
+<span align="center">
+
 hohos
 =======================
 
@@ -15,8 +17,9 @@ hohos
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos/fork) -->
 
 Visit hohos - [hohos.tech](http://hohos.tech)
+</span>
 
-Running hohos locally 
+<h3 align="center">How to run hohos locally ?</h3> <hr>
       
       sudo apt-get install python3
       sudo apt-get install python3-pip
