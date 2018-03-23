@@ -12,18 +12,17 @@
 [![fork this repo](http://githubbadges.com/fork.svg?user=dbads&repo=github-badges&style=flat&color=fff&background=007ec6)](https://github.com/dbads/hohos/fork) -->
 
 
-[![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) <br>
+[![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby)<br>
 
 Visit hohos - [hohos.tech](http://hohos.tech)
 
 
 
-<h3>How to run hohos locally ?</h3> <hr>
-      
+<h3>How to run hohos locally ?</h3><hr>
       
 Clone the repo and follow these steps 
 
-       Clone - git clone https://github.com/dbads/hohos.git
+       git clone https://github.com/dbads/hohos.git
 
 1. **Install Requirements**
    
@@ -72,8 +71,8 @@ Clone the repo and follow these steps
 6. **Commands to run server**
 
        python3 manage.py runserver <ip>:<port>
-       // default port is 8000 and default address is 127.0.0.1
-       ctrl+c   to stop the server
+       default port is 8000 and default address is 127.0.0.1
+       ctrl+c to stop the server
        
        
 *Want to add some feature in hohos, fork the hohos, make changes and create a Pull Request*
