@@ -1,4 +1,6 @@
-<h2>hohos</h2> 
+<img src="./hohos/hohos/static/img/homepics/4.jpg">
+
+<h1>hohos</h1> 
 
 [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby)<br>
 
