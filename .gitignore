@@ -9,6 +9,7 @@ django_project/
 django_project/db.sqlite3
 django_project/sensitive.py
 mission_ajax
+.travis.yml
 
 
 # Byte-compiled / optimized / DLL files
