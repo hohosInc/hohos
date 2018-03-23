@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+{% trans 'hohos - 404' %}
+{% endblock %}
+
+{% block head %}
+<style type="text/css">
+#downitems a {color: black;}
+#downitems i {color: white;}
+</style>
+{% endblock %}
+
+
+{% block main %}
+  <div class="page-header">
+    <h1>Page not found</h1>
+  </div>
+  <p style="margin-top: 1.2em">We could not find the page you are looking for :(</p>
+
+  <div class="col col-md-6 col-md-offset-3">
+    <img style="margin-top:85px;" src="{% static 'img/hohos.gif' %}" class="img img-responsive">
+
+  </div>
+
+{% endblock main %}
+
+
+
+{% block footer %}
+
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<footer style="background-color:#008080;">
+<div id="downitems" class="container-fluid" style='padding: 10px; margin-top: 70px; height: 50px; background-color: #008080;'>
+<p style="text-align:center;">
+  
+  <a href="{% url 'contact' %}"><i class="fa fa-volume-control-phone fa-1x fa-fw"></i>Contact</a> | 
+  <a href="https://www.linkedin.com/in/hohos-guys-48082313a/"><i class="fa fa-linkedin fa-1x fa-fw"></i>LinkedIn</a> | 
+  <a href="https://www.facebook.com/Hohos-1825301447690434/"><i class="fa fa-facebook fa-1x fa-fw"></i>Facebook</a> | 
+  <a href="https://twitter.com/hohosguys"><i class="fa fa-twitter fa-1x fa-fw"></i>Twitter</a> | 
+  <a href="https://www.quora.com/profile/Hohos-Guys"><i class="fa fa-quora fa-1x fa-fw"></i>Quora</a> | 
+  <a href="https://plus.google.com/u/0/114682388073028099952"><i class="fa fa-google-plus fa-1x fa-fw"></i>Google+</a> | 
+  <a href="">Hohos</a>
+
+
+</p>
+</div>
+</footer>
+
+ {% endblock %}

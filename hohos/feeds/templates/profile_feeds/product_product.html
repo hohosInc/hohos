@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load staticfiles %}   
+{% load i18n %}     
+ 
+{% block title %}hohos - Products-Products OpenChat {% endblock %}
+
+{% block head %}  
+   
+  <link href="{% static 'css/feeds.css' %}?v=1" rel="stylesheet">
+  <link href="{% static 'css/feeds_profile_extra.css' %}?v=1" rel="stylesheet">
+  <link href="{% static 'css/feeds_sidebar.css' %}?v=1" rel="stylesheet">
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+<style type="text/css"> 
+.item img{
+  min-height: 200px;
+  max-height: 100px;
+}
+.item li a { color: red; font-weight: bold; }
+.center {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+</style> 
+
+<!-- Google Adsense script -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9853052969558014",
+    enable_page_level_ads: true
+  });
+</script>
+
+{% endblock head %}  
+   
+ 
+{% block main_fluid %}   
+
+  <div class="col col-md-2" style="margin-left:55px;">
+  <br>
+  <span class="center"><button class="btn" style="background-color: #F5DEB3; color: brown; font-weight: bold;"> Top Products <i class="fa fa-hand-o-down fa-1x"></i> </button></span>
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+<!--     <ol class="carousel-indicators">
+
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+    </ol> -->
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">    
+        {% for feed in top_product_feeds %}
+          {% if forloop.first %}
+
+          <div class="item active">
+          <a href="{% url 'profile' top_product_feeds.0.user.username %}">
+            <img src="{{top_product_feeds.0.user.profile.get_picture}}" alt="" style="width:100%;">
+          </a>
+            <ul style="margin-left: 15px;">
+              <li style=""><a href="{% url 'profile' feed.user.username %}"> {{feed.user.profile.get_screen_name}}</a></li>
+              <li style=""><a href="{% url 'profile_likers' feed.user.username %}"> {{feed.user.profile.likes}} likers</a></li>
+              <li style=""><a href="{% url 'likes_to' feed.user.username %}"> 
+              likes to {{feed.user.profile.likes_to}}</a></li>
+            </ul>
+          
+          </div>  
+          {% else %}
+          <div class="item">
+
+          <a href="{% url 'profile' feed.user.username %}">
+            <img src="{{feed.user.profile.get_picture}}" alt="" style="width:100%;">
+          </a>            
+            <ul style="margin-left: 15px;">
+              <li style=""><a href="{% url 'profile' feed.user.username %}"> {{feed.user.profile.get_screen_name}}</a></li>
+              <li style=""><a href="{% url 'profile_likers' feed.user.username %}"> {{feed.user.profile.likes}} likers</a></li>
+              <li style=""><a href="{% url 'likes_to' feed.user.username %}"> 
+              likes to {{feed.user.profile.likes_to}}</a></li>
+            </ul>
+
+          </div>
+            <!-- Left and right controls -->
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+
+          {% endif %}
+        {% endfor %}
+      </div>        
+
+      </div>  
+
+      <div>
+        <hr style="border-color: gray; margin-bottom: 3px; margin-top: 13px;">
+        <small style="color: black; font-size: 11px;"><a href="{% url 'about' %}" class="about"> About </a><a href="{% url 'contact' %}" class="contact"> Contact </a><a href="{% url 'privacy' %}" class="privacy"> Privacy </a><a href="{% url 'tos' %}" class="terms"> Terms </a></small>
+        <br style="margin-top: 3px;">
+        <small style="font-size: 11px;">Copyright © 2017 hohos.</small> 
+
+        <hr style="margin-top: 5px; margin-bottom: 5px">
+
+        <button class="btn btn-info btn-sm btn-block inviteblock">Invite Friends</button>
+
+        <hr style="margin-top: 5px; margin-bottom: 7px">
+
+        <form method="post" class="user-invite-form"> {% csrf_token %}
+         <input style="width: 170px;" type="text" name="invite" id="invite" placeholder="friends Email" onclick="show_invite_btn()">
+         <hr style="margin-top: 3px; margin-bottom: 3px">
+         <button class="btn btn-sm btn-primary" style="width: 100px; font-size: 12px; display: none;" id="invitebutton">Invite</button>
+        </form>  
+        </div> 
+        <br>
+     </div>
+
+
+      <div class="col-md-5 col-md-offset-1">
+        {% if messages %}
+        {% for message in messages %} 
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% endif %}
+
+        <ul class="nav nav-tabs center">
+          <li><a href="{% url 'profilefeeds_h_h' %}" class="btn btn-success other"> Human  <i class="fa fa-arrow-right fa-1x"></i>  human </a></li>
+          <li><a href="{% url 'profilefeeds_h_p' %}" class="btn btn-success other">  Human  <i class="fa fa-arrow-right fa-1x"></i>  Product</a></li>
+          <li><a href="{% url 'profilefeeds_p_h' %}" class="btn btn-success other">  Product  <i class="fa fa-arrow-right fa-1x"></i>  Human  </a></li>    
+        </ul>
+
+        <div>
+            {% include 'profile_feeds/open_chat_feed_compose.html' %}    
+            <span class="center">
+            <button class="btn" style="background-color: #F5DEB3; color: brown;">Product <i class="fa fa-arrow-right"></i> Product</button>
+            </span>   
+        </div>
+
+          <ul class="stream">
+            {% for feed in product_product_profile_feeds %}
+              {% include 'feeds/partial_feed_profile.html' with feed=feed %}
+            {% endfor %}
+          </ul>
+
+          <div class="load">
+            <i class="fa fa-spinner fa-spin fa-1x"></i>
+          </div>
+          
+          <form method="get" action="{% url 'load' %}" id="load_feed" autocomplete="off">
+            <input type="hidden" name="feed_source" id="feed_source" value="product_product_profile_feeds">
+            <input type="hidden" name="from_feed" value="{{ from_feed }}">
+            <input type="hidden" name="page" value="{{ page }}">
+          </form>
+          
+        </div>
+
+  <div class="col col-md-3 pull-right" style="max-height:1050px; overflow:scroll;">
+    <ul class="stream_sidebar nostyle"> 
+        <li style="">
+        <span class="center"><button class="btn" style="background-color: #F5DEB3; color: brown; font-weight: bold;"> Active OpenChats among Products <i class="fa fa-hand-o-down fa-1x"></i> </button></span>
+        </li> 
+        <br>
+
+      {% for feed in most_active_profile_talks_p_p %}
+        {% include 'profile_feeds/profile_talks_sidebar.html' with feed=feed %}
+      {% endfor %}
+
+        <br>
+        <li style="">
+        <span style="color:#008080; font-size: 15px;" class="center">
+        <a href="{% url 'profilefeeds_p_p' %}" type="button" class="btn btn-danger center">See All</a>
+        </span>
+        </li> 
+        <br>
+
+    </ul>
+  </div>
+  
+{% endblock main_fluid %}
+
+
+
+{% block js %}
+
+  <script src="{% static 'js/jquery.bullseye-1.0-min.js' %}"></script> 
+  <script src="{% static 'js/feeds_profile.js' %}"></script>
+
+  <script src="{% static 'js/feeds_profile_extra.js' %}"></script>
+
+<script type="text/javascript">
+  function show_invite_btn(){
+     $("#invitebutton").css('display','block');
+  }
+</script>
+{% endblock js %}

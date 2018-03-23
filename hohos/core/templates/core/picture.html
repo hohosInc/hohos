@@ -1,0 +1,129 @@
+{% extends 'base.html' %} 
+
+{% load i18n static %}  
+
+{% block title %}{% trans 'hohos - Settings, Select a smart pic of you @hohos' %}{% endblock %} 
+ 
+{% block head %}
+  <link href="{% static 'css/jquery.Jcrop.min.css' %}" rel="stylesheet">
+  <script src="{% static 'js/jquery.Jcrop.min.js' %}"></script>
+  <script src="{% static 'js/picture.js' %}"></script>
+ 
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+ 
+  {# PHOTOS PAGE SCRIPTS #}
+  <script src="{% static 'js/progress-bar-upload.js' %}"></script>
+
+<style type="text/css"> 
+.container-fluid a {color: black;}
+.container-fluid i {color: white;}
+</style> 
+
+{% endblock head %}
+
+{% block main %}
+  <div class="page-header mytext">
+    <table>
+    <tr>
+    <th>
+    <i style="color: #008080;" class='fa fa-refresh fa-3x fa-fw'></i>
+    </th>
+    <th>
+      <h1>{% trans 'Account Settings' %}</h1>
+    </th>
+    </tr>
+  </table>
+
+    <!--       this url will be set to a constant
+      account of hohos so, it will be done when its launched  --> 
+      <a type="button" href="{% url 'profile' 'hohoshelp' %}" class="pull-right  btn btn-info btn-sm"><small>Any Problem?</small></a>
+      
+  </div><hr style="border-color:#008080;">
+
+  <div class="row" style="margin-top: 2em">
+    <div class="col-md-3">
+      {% include 'core/partial_settings_menu.html' with active='picture' %}
+
+      <hr class="hr" style="margin-top: 20px;">
+      <a href="{% url 'home' %}"><h1 style="color: black; text-align: center; font-size: 70px;">hohos</h1></a>
+
+      <div style="text-align: center;">
+      <div class="fb-like" data-href="https://www.facebook.com/hohosguys/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+      </div>
+
+      <hr class="hr">
+
+      <small style="color: white; "><a href="{% url 'home' %}">Home </a><a href="{% url 'about' %}">About </a><a href="{% url 'contact' %}">Contact </a><a href="{% url 'privacy' %}">Privacy </a><a href="{% url 'tos' %}">Terms </a></small>
+      <small>Copyright © 2017 hohos. All rights reserved.</small>
+
+      <br><br>
+
+    </div>
+    <div class="col-md-9"> 
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %} 
+      <h3 style="margin-top: 0">{% trans 'Change Picture' %}</h3>
+        <img src="{{ user.profile.get_picture }}" style="width: 450px; border-radius: 5px; margin-bottom: 1em;" >
+
+    <input id="fileupload" type="file" name="image" multiple style="display: none;"
+    data-url="{% url 'profile_pic_upload' %}"
+    data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+    </div>
+    </div>
+<div class="row">
+    <div class="col col-md-3 col-md-offset-6">
+    <button type="button" class="btn btn-primary my js-upload-photos ">
+    <span class="glyphicon glyphicon-cloud-upload"></span> Your Picture!
+    </button>
+    </div>
+</div>
+
+
+  <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Uploading...</h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock main %}
+
+
+
+{% block footer %}
+<br><br><br><br><br><br><br><br><br><br>
+
+<footer style="background-color:#008080;">
+<div class="container-fluid" style='padding: 10px; margin-top: 70px; height: 50px; background-color: #008080;'>
+<p style="text-align:center;">
+  
+ <!--  <a href="{% url 'contact' %}"><i class="fa fa-volume-control-phone fa-1x fa-fw"></i>Contact</a> | --> 
+  <a href="https://www.linkedin.com/in/hohos-guys-48082313a/"><i class="fa fa-linkedin fa-1x fa-fw"></i>LinkedIn</a> | 
+  <a href="https://www.facebook.com/Hohos-1825301447690434/"><i class="fa fa-facebook fa-1x fa-fw"></i>Facebook</a> | 
+  <a href="https://twitter.com/hohosguys"><i class="fa fa-twitter fa-1x fa-fw"></i>Twitter</a> | 
+  <a href="https://www.quora.com/profile/Hohos-Guys"><i class="fa fa-quora fa-1x fa-fw"></i>Quora</a> | 
+  <a href="https://plus.google.com/u/0/114682388073028099952"><i class="fa fa-google-plus fa-1x fa-fw"></i>Google+</a> | 
+  <a href="">Hohos</a>
+
+
+</p>
+</div>
+</footer>
+
+ {% endblock %} 
