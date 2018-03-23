@@ -1,4 +1,4 @@
-<h2 align="center">hohos</h2> 
+<h2>hohos</h2> 
 <!-- [![Dependency Status](https://david-dm.org/dbads/hohos/status.svg?style=flat)](https://david-dm.org/dbads/hohos) [![Build Status](https://travis-ci.org/dbads/hohos.svg?branch=master)](https://travis-ci.org/dbads/hohos) [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby) -->
 
 <!--
@@ -18,40 +18,61 @@ Visit hohos - [hohos.tech](http://hohos.tech)
 
 
 
-<h3 align="center">How to run hohos locally ?</h3> <hr>
+<h3>How to run hohos locally ?</h3> <hr>
       
-      sudo apt-get install python3
-      sudo apt-get install python3-pip
-      pip3 install -r requrements.txt
+      
+Follow these steps 
 
-Database configuration
+1. Install Requirements
+   
+       sudo apt-get install python3
+       sudo apt-get install python3-pip
+       pip3 install -r requrements.txt
 
-     If you use postgresql then
-     Change name of databse, db user, db password, localhost, and you can leave port blank
+2. Database configuration
+
+       If you use postgresql then
+       Change name of databse, db user, db password, localhost, and you can leave port blank
+
+       If you want to use sqlite3 then just uncomment the sqlite configuration.
+
+3. Configuring Settings.py file 
+
+       you can make DEBUG=True while you are working locally
+       ALLOWED_HOSTS=['*'] in local
+
+4. Sensitive Information
      
-     If you want to use sqlite3 then just uncomment the sqlite configuration.
+       There are some variables which are coming from either environment variables or from a file sensitive.py 
+       so you just create this file and pust those variables in that file or you can use environment variables too. 
 
-Configuring Settings.py file 
+       #SENSITIVE DATABASE INFORMATION
+       DB_NAME='xyz'
+       DB_PASS='your_DB_PASS'
+       DB_PORT=5432
+       DB_USER='abc'
 
+       #SENSITIVE EMAIL DATA
+       SECRET_KEY='7yl&y17r&7h*#fk&whgdhgyys#^m$0+k$)l!-idm*md%w_ldcj'
+       EMAIL_HOST='smtp.gmail.com' 
+       EMAIL_HOST_USER='your Email'
+       EMAIL_HOST_PASSWORD='your email password'
+       EMAIL_PORT='587'
 
-     you can make DEBUG=True while you are working locally
-     ALLOWED_HOSTS=['*'] in local
-     
-Sensitive Information
-     
-     There are some variables which are coming from either environment variables or from a file sensitive.py 
-     so you just create this file and pust those variables in that file or you can use environment variables too. 
-     
-     #SENSITIVE DATABASE INFORMATION
-     DB_NAME='xyz'
-     DB_PASS='your_DB_PASS'
-     DB_PORT=5432
-     DB_USER='abc'
+5. Now Use the following commands to build the required tables
 
-     #SENSITIVE EMAIL DATA
-     SECRET_KEY='7yl&y17r&7h*#fk&whgdhgyys#^m$0+k$)l!-idm*md%w_ldcj'
-     EMAIL_HOST='smtp.gmail.com' 
-     EMAIL_HOST_USER='your Email'
-     EMAIL_HOST_PASSWORD='your email password'
-     EMAIL_PORT='587'
-     
+       python3 manage.py migrate
+       python3 manage.py makemigrations
+       python3 manage.py collectstatic
+       python3 manage.py createsuperuser to make a super user
+       visit ip:domain/admin  to see admin panel
+       
+6. Commands to run server
+
+       python3 manage.py runserver <ip>:<port>
+       // default port is 8000 and default address is 127.0.0.1
+       ctrl+c   to stop the server
+       
+       
+
+       
