@@ -6,7 +6,7 @@ hohos/hohos/media_root
 *.swo
 *.swp
 hohos/db.sqlite3
-hohos/sensitive.py
+hohos/hohos/sensitive.py
 mission_ajax
 .travis.yml
 
