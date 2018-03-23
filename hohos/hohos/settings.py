@@ -169,7 +169,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+#Not using language translation now
+# USE_I18N = True
 
 USE_L10N = True
 
