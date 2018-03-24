@@ -1,4 +1,4 @@
-<img src="./hohos/hohos/static/img/homepics/4.jpg">
+<img src="./hohos/hohos/static/img/homepics/hohos(1).png">
 
 <h1>hohos</h1> 
 
