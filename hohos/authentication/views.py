@@ -68,13 +68,13 @@ def signup_human(request):
             wel_post = ''
             welcome1= ' You seem to love facial expressions?? You can Make it awesome!\n'\
                       +'Challenge your friends and imitate them. Sounds cool??\n'\
-                      +'Welcome!\nhttp://www.hohos.in/feeds/challenge/'
+                      +'Welcome!\nhttp://www.hohos.tech/feeds/challenge/'
             welcome2= ' Get ready to speak through your awesome facial expressions...\n'\
-                      +'http://www.hohos.in/feeds/'
+                      +'http://www.hohos.tech/feeds/'
             welcome3= ' You are awesome! \n'\
                       +'Imitate your friends expressions and challenge them yours.'\
                       +'You should try it once!\n'\
-                      +'Its amazing!\nhttp://www.hohos.in/feeds/'
+                      +'Its amazing!\nhttp://www.hohos.tech/feeds/'
             
             post_no = random.randint(1,3)
             if post_no==1: wel_post = welcome1
@@ -106,26 +106,29 @@ def signup_human(request):
             to = [email]
             subject = 'Welcome at hohos ' + user.username
             message = 'Dear '+user.username+'!\n'\
-                          + 'We are happy to see you on hohos.\n' \
+                          + 'We are happy to see you on hohos.tech\n' \
                           + 'You will have lots of amazing experience along the time. It will get better if '\
-                          + 'you participate in share and imitate culture at hohos.in/feeds/\n'\
+                          + 'you participate in share and imitate culture at hohos.tech/feeds/\n'\
                           + 'Challenge your facial expressions, let your likers and other people imitate them.'\
                           + 'Because its awesome to see the different versions of same thing.\n'\
                           + 'This becomes rejoicing when your own friends imitate you.\n\n'\
-                          + 'Moreover you can become the part of OpenChat community at - hohos.in/feeds/openchat/h_h/ '\
+                          + 'Moreover you can become the part of OpenChat community at - hohos.tech/feeds/openchat/h_h/ '\
                           + ' here You can talk to your daily use products too. Which makes things a lot easier.\n\n'\
                           + 'Build you profile for better interaction.'\
-                          + 'First hohos.in/login and then move to hohos.in/settings/human/\n\n'\
+                          + 'First hohos.tech/login and then move to hohos.tech/settings/human/\n\n'\
                           + 'Best wishes!\n'\
-                          + '-Team iA at hohos.in'
+                          + '-Team iA at hohos.tech'
             if to:
-              send_mail(subject,message,from_email,to,fail_silently=False)
+              try:
+                send_mail(subject,message,from_email,to,fail_silently=False)
+              except: 
+                pass
 
             print('inside signup, authentication.views')
             print('user\'s pk %d'%(user.pk))
             return redirect('feeds')
 
-    else: 
+    else:   
         return render(request, 'authentication/signup.html',{
           'form_human': SignUpForm(),
           'users_challenges' : users_challenges,
@@ -220,15 +223,17 @@ def signup_products(request):
                           + 'people using you start sharing their feedback\n'\
                           + 'This will help you become better and more efficient'\
                           + 'This way both you and customers may get the best of available\n'\
-                          + 'Moreover you can become the part of OpenChat community at - hohos.in/feeds/openchat/h_h/ '\
+                          + 'Moreover you can become the part of OpenChat community at - hohos.tech/feeds/openchat/h_h/ '\
                           + ' here You can talk to your daily use products too. Which makes things a lot easier.\n\n'\
                           + 'Build you profile for better interaction.'\
-                          + 'First hohos.in/login and then move to hohos.in/settings/human/\n\n'\
+                          + 'First hohos.tech/login and then move to hohos.tech/settings/human/\n\n'\
                           + 'Best wishes!\n'\
-                          + '-Team iA at hohos.in'
+                          + '-Team iA at hohos.tech'
             if to:
-              send_mail(subject,message,from_email,to,fail_silently=False)
-
+              try:
+                send_mail(subject,message,from_email,to,fail_silently=False)
+              except:
+                pass
 
             print('inside signup, authentication.views')
             print('user\'s pk %d'%(user.pk))

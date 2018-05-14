@@ -176,20 +176,20 @@ p {
       {% csrf_token %}
 
           <div class="form-group{% if form_human.username.errors %} has-error{% endif %}">
-          <input type="text" class="form-control greentext" id="username" name="username" placeholder="username" title="Unique username, which should not contain +,-, and white spaces" required>
+          <input type="text" class="form-control greentext" name="username" placeholder="username" title="Unique username, which should not contain +,-, and white spaces" required>
           {% for error in form_human.username.errors %}
             <label class="control-label whitetext"><span class="whitetext">{{ error }}</span></label>
           {% endfor %}
           </div>
           
           <div class="form-group{% if form_human.email.errors %} has-error{% endif %}">
-          <input type="text" class="form-control greentext" id="email" name="email" placeholder="email" title="This is used in to send you password reset link, in case you forget your password" required="True">
+          <input type="text" class="form-control greentext" name="email" placeholder="email" title="This is used in to send you password reset link, in case you forget your password" required="True">
           {% for error in form_human.email.errors %}
             <label class="control-label whitetext"><span class="whitetext">{{ error }}</span></label>
           {% endfor %}
           </div> 
          <div class="form-group{% if form_human.password.errors %} has-error{% endif %}">
-          <input type="password" class="form-control greentext" id="password" name="password" placeholder="password" title="Choose a strong password" required>
+          <input type="password" class="form-control greentext" name="password" placeholder="password" title="Choose a strong password" required>
           {% for error in form_human.password.errors %}
 
             <label class="control-label whitetext"><span class="whitetext">{{ error }}</span></label>
@@ -231,7 +231,7 @@ p {
       {% csrf_token %}
         <input type="hidden" name="is_product" value="1" >
           <div class="form-group{% if form_products.username.errors %} has-error{% endif %}">
-          <input type="text" class="form-control redtext" id="username" name="username" placeholder="username" title="Unique username, which should not contain +,-, and white spaces" required>
+          <input type="text" class="form-control redtext" name="username" placeholder="username" title="Unique username, which should not contain +,-, and white spaces" required>
           {% for error in form_products.username.errors %}
             <label class="control-label">{{ error }}</label>
           {% endfor %}
@@ -244,14 +244,14 @@ p {
         </div> -->
 
          <div class="form-group{% if form_products.email.errors %} has-error{% endif %}">
-          <input type="text" class="form-control redtext" id="email" name="email" placeholder="email" title="This is used in to send you password reset link, in case you forget your password" required>
+          <input type="text" class="form-control redtext" name="email" placeholder="email" title="This is used in to send you password reset link, in case you forget your password" required>
           {% for error in form_products.email.errors %}
             <label class="control-label">{{ error }}</label>
           {% endfor %}
           </div> 
 
          <div class="form-group{% if form_products.password.errors %} has-error{% endif %}">
-          <input type="password" class="form-control redtext" id="password" name="password" placeholder="password" title="Choose a strong password" required>
+          <input type="password" class="form-control redtext" name="password" placeholder="password" title="Choose a strong password" required>
           {% for error in form_products.password.errors %}
             <label class="control-label">{{ error }}</label>
           {% endfor %}

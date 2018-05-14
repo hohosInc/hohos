@@ -49,16 +49,16 @@ def knowPeople(request):
             #         message = 'Dear '+user.username+'!\n'\
             #                   + 'We hope to see you again on hohos.\n' \
             #                   + 'You will have lots of amazing experience along the time. It will get better if'\
-            #                   + 'you participate in share and imitate culture at hohos.in/feeds/\n'\
+            #                   + 'you participate in share and imitate culture at hohos.tech/feeds/\n'\
             #                   + 'Challenge your facial expressions, let your likers and other people imitate them.'\
             #                   + 'Because its awesome to see the different versions of same thing.\n'\
             #                   + 'This becomes rejoicing when your own friends imitate you.\n\n'\
-            #                   + 'Moreover you can become the part of OpenChat community at - hohos.in/feeds/openchat/h_h/ '\
+            #                   + 'Moreover you can become the part of OpenChat community at - hohos.tech/feeds/openchat/h_h/ '\
             #                   + ' here You can talk to your daily use products too. Which makes things a lot easier.\n\n'\
             #                   + 'Build you profile for better interaction.'\
-            #                   + 'First hohos.in/login and then move to hohos.in/settings/human/\n\n'\
+            #                   + 'First hohos.tech/login and then move to hohos.tech/settings/human/\n\n'\
             #                   + 'Best wishes!\n'\
-            #                   + '-TeamiA at hohos.in'
+            #                   + '-TeamiA at hohos.tech'
 	# return render(request, 'newsletter/knowpeople.html', {
  #        'users_not_login_more_than_7_days' : users_not_login_more_than_7_days, 
  #        })
@@ -89,9 +89,11 @@ def contact(request):
 		to_email = ['deepakbharti823@gmail.com'] #doesnt matter u own this email or not
 		contact_message = 'I am '+full_name+' \n'+message+' contact me at \n'+from_email
  		
-		send_mail(subject,contact_message,from_email,
-				  to_email,fail_silently=False)
-
+		try:
+			send_mail(subject,contact_message,from_email,
+			  to_email,fail_silently=False)
+		except: pass
+ 		
 		context = {
 		'form': form1,
 		'title2': 'We have received your mail, we will contact you soon!',

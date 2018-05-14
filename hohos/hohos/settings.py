@@ -25,7 +25,7 @@ ALLOWED_HOSTS = ['139.59.77.182','.hohos.tech','hohos.tech','www.hohos.tech','ww
 
     
 ADMINS = (   
-    ('deepak','imperialarkon@gmail.com'), 
+    # ('deepak','imperialarkon@gmail.com'), 
     )
 
 EMAIL_USE_TLS = True
@@ -79,12 +79,12 @@ INSTALLED_APPS = (
 )
 
 
-AUTHENTICATION_BACKENDS = (
+# AUTHENTICATION_BACKENDS = (
     
-   'django.contrib.auth.backends.ModelBackend',
-   # 'social.backends.google.GoogleOAuth2',
-   'allauth.account.auth_backends.AuthenticationBackend',
-)
+#    'django.contrib.auth.backends.ModelBackend',
+#    # 'social.backends.google.GoogleOAuth2',
+#    'allauth.account.auth_backends.AuthenticationBackend',
+# )
 
 
 MIDDLEWARE_CLASSES = (
@@ -100,12 +100,12 @@ MIDDLEWARE_CLASSES = (
     # 'authentication.onlineUsers.ActiveUserMiddleware',
 )
  
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '139.59.87.76',              
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '139.59.77.182',              
+#     }
+# }
 
 
 ROOT_URLCONF = 'hohos.urls'

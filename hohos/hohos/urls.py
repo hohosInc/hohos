@@ -21,6 +21,7 @@ from django.contrib.auth.views import (
 
 urlpatterns = [          
     # url(r'^$',core_views.wait,name='wait'),
+    url(r'coolAdMiN_@3/',include(admin.site.urls)),
     url(r'^googleb5ffb42fb0a2feb6.html/$', core_views.crawl, name='crawl'),
     url(r'^sitemap/$', core_views.sitemap, name='sitemap'),
 

@@ -476,7 +476,7 @@ Your friend at hohos has challenged you to copy their Styles and Facial Expressi
 Come and show your own version of these styles and Facial Expressions. 
 Because its fun to see various versions of same expression from different people\n
 Waiting for your amazing styles! \n 
-www.hohos.in''' 
+www.hohos.tech''' 
     else:
         message = '''Hey there!\n
 Your friend at hohos has challenged you to copy their Styles and Expressions.\n 
@@ -484,12 +484,18 @@ So you are welcome at hohos.\n
 Come and show your own version of various Expressions shared by other users.\n 
 Because its fun to see various versions of same expression from different people\n 
 Waiting for your amazing styles! \n 
-www.hohos.in''' + "\n\nYour friend "+ request.user.username + " at www.hohos.in"+request.user.username       
-
+www.hohos.tech''' + "\n\nYour friend "+ request.user.username + " at www.hohos.tech"+request.user.username       
+    
+    message = '<a href="www.hohos.tech">okay brow</a>'
     if '@' in to_email and '.' in to_email:
         from_email = django_settings.EMAIL_HOST_USER
-        send_mail(subject,message,from_email,
-                  to,fail_silently=False)
+        
+        # try: send_mail(subject,message,from_email,
+        #           to,fail_silently=False)
+        # except: pass
+        # send_mail(subject,message,from_email,to,fail_silently=False,html_message=htmlmsg) #here htmlmsg is a html message which override message
+        send_mail(subject,message,from_email,to,fail_silently=False)
+
         html="<i class='fa fa-check'></i>" + ' Invited ' + '<i class="fa fa-smile-o" aria-hidden="true"></i>'
         return HttpResponse(html)
     else:
