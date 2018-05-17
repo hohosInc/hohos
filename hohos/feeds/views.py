@@ -537,9 +537,9 @@ def email_on_post(request):                   # feeds on profiles and reponse an
             common_message = '<br>-------------------------------------------------------------------------<br>'+\
                         '<br><br>For more you can always check your profile at - <a href="www.hohos.tech">hohos</a>'+\
                          to_user.username +\
-                        '<br><br>Besides there are some new challenges and responses <a href="www.hohos.tech/feeds/">Responses</a>" which may attract you. - '+\
+                        '<br><br>Besides there are some new challenges and responses <a href="www.hohos.tech/feeds/">Responses</a>" which may attract you. - '\
                         # +'<br><br>And awesome OpenChat at <a href="www.hohos.tech/feeds/openchat/h_h/'+\
-                        '<br><br>TeamiA at <a href="www.hohos.tech">hohos</a>'+\
+                        +'<br><br>TeamiA at <a href="www.hohos.tech">hohos</a>'+\
                         '<br><br>In case you do not have access to your account You can always mail us at <a href="mailto:hohosguys@gmail.com">hohosguys</a>'+\
                         '<br><br><br><br>This is a system generated E-mail, Login at hohos and go to Settings For managing E-mails you get from us.' 
             if mail_type == 'challenge_mail':
