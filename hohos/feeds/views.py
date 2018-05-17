@@ -534,40 +534,40 @@ def email_on_post(request):                   # feeds on profiles and reponse an
         if to_user.email and to_user!=user:
             to_email=to_user.email
             to = [to_email]
-            common_message = '\n-------------------------------------------------------------------------\n'+\
-                        '\n\nFor more you can always check your profile at - www.hohos.tech'+\
+            common_message = '<br>-------------------------------------------------------------------------<br>'+\
+                        '<br><br>For more you can always check your profile at - <a href="www.hohos.tech">hohos</a>'+\
                          to_user.username +\
-                        '\n\nBesides there are some new challenges and responses www.hohos.tech/feeds/ which may attract you. - '\
-                        +'\n\nAnd awesome OpenChat at www.hohos.tech/feeds/openchat/h_h/'+\
-                        '\n\nTeamiA at www.hohos.tech'+\
-                        '\n\nIn case you do not have access to your account You can always mail us at hohosguys@gmail.com'+\
-                        '\n\n\n\nThis is a system generated E-mail, Login at hohos and go to Settings For managing E-mails you get from us.' 
+                        '<br><br>Besides there are some new challenges and responses <a href="www.hohos.tech/feeds/">Responses</a>" which may attract you. - '+\
+                        # +'<br><br>And awesome OpenChat at <a href="www.hohos.tech/feeds/openchat/h_h/'+\
+                        '<br><br>TeamiA at <a href="www.hohos.tech">hohos</a>'+\
+                        '<br><br>In case you do not have access to your account You can always mail us at <a href="mailto:hohosguys@gmail.com">hohosguys</a>'+\
+                        '<br><br><br><br>This is a system generated E-mail, Login at hohos and go to Settings For managing E-mails you get from us.' 
             if mail_type == 'challenge_mail':
                 subject = user.profile.get_screen_name() + ' has challenged you ' #+ to_user.profile.get_screen_name()
-                message = user.profile.get_screen_name() + ' has challenged you with following caption - \n\n'\
-                        + post + '\nSee all challenges for you at www.hohos.tech/challenges/for/' + to_user.username + common_message
+                message = user.profile.get_screen_name() + ' has challenged you with following caption - <br><br>'\
+                        + post + '<br>See all challenges for you at <a href="www.hohos.tech/challenges/for/'+ to_user.username +'">Challenges for you</a>' + common_message
 
             elif mail_type == 'response_mail':
                 subject = user.profile.get_screen_name() + ' has responded to your facial expressions ' #+ to_user.profile.get_screen_name()
-                message =  user.profile.get_screen_name() + ' has imitated your style in an amazing way - \n\n'\
-                        + post + '\nSee the whole story at www.hohos.tech/feeds/response/' + response_for_id + common_message
+                message =  user.profile.get_screen_name() + ' has imitated your style in an amazing way - <br><br>'\
+                        + post + '<br>See the whole story at <a href="www.hohos.tech/feeds/response/'+ response_for_id +'">Respnse for your challenge</a>' + common_message
 
                 if response_for_user:
                     from_email = django_settings.EMAIL_HOST_USER
                     to_email_2 = response_for_user.email  #email of the originally cahllenged user
                     to_2 = [to_email_2]
                     subject_2 = user.profile.get_screen_name() + ' has responded to a challenge which was for you '
-                    message_2 = user.profile.get_screen_name() + ' has responded to a challengewhich was originally made for you  - \n\n'\
-                        + post + '\nSee the whole story at www.hohos.tech/feeds/response/' + response_for_id + common_message
+                    message_2 = user.profile.get_screen_name() + ' has responded to a challengewhich was originally made for you  - <br><br>'\
+                        + post + '<br>See the whole story at <a href="www.hohos.tech/feeds/response/'+ response_for_id +'">Responses</a>'+common_message
                     try:
-                        send_mail(subject_2, message_2, from_email, to_2, fail_silently=False)        
+                        send_mail(subject_2, message_2, from_email, to_2, fail_silently=False,html_message=message_2)        
                     except:
                         pass
                         
             elif mail_type == 'profile_talk_mail':
                 subject = user.profile.get_screen_name() + ' seems to like you very much ' #+ to_user.profile.get_screen_name()
-                message =  user.profile.get_screen_name() + ' has written this on your profile at hohos - \n\n'\
-                        + post + '\nSee the whole story at www.hohos.tech/' + to_user.username + common_message
+                message =  user.profile.get_screen_name() + ' has written this on your profile at hohos - <br><br>'\
+                        + post + '<br>See the whole story at <a href="www.hohos.tech/' + to_user.username+ '">'+to_user.username+'</a>' + common_message
             else:
                 to = django_settings.EMAIL_HOST_USER
                 subject = 'no to_user mail found so sending back to hohosguys'
@@ -575,7 +575,7 @@ def email_on_post(request):                   # feeds on profiles and reponse an
 
             from_email = django_settings.EMAIL_HOST_USER
             try:
-                send_mail(subject,message,from_email,to,fail_silently=False)
+                send_mail(subject,message,from_email,to,fail_silently=False,html_message=message)
             except:
                 pass
             return HttpResponse('')
