@@ -476,7 +476,7 @@ Your friend at hohos has challenged you to copy their Styles and Facial Expressi
 Come and show your own version of these styles and Facial Expressions. 
 Because its fun to see various versions of same expression from different people\n
 Waiting for your amazing styles! \n 
-www.hohos.tech''' 
+<a href="http://www.hohos.tech/">hohos</a>''' 
     else:
         message = '''Hey there!\n
 Your friend at hohos has challenged you to copy their Styles and Expressions.\n 
@@ -484,7 +484,7 @@ So you are welcome at hohos.\n
 Come and show your own version of various Expressions shared by other users.\n 
 Because its fun to see various versions of same expression from different people\n 
 Waiting for your amazing styles! \n 
-www.hohos.tech''' + "\n\nYour friend "+ request.user.username + " at www.hohos.tech"+request.user.username       
+<a href="http://www.hohos.tech/">hohos</a>''' + "\n\nYour friend "+ request.user.username + " at <a href='http://www.hohos.tech/'>hohos</a>"+request.user.username       
     
     message = '<a href="www.hohos.tech">okay brow</a>'
     if '@' in to_email and '.' in to_email:
@@ -494,7 +494,7 @@ www.hohos.tech''' + "\n\nYour friend "+ request.user.username + " at www.hohos.t
         #           to,fail_silently=False)
         # except: pass
         # send_mail(subject,message,from_email,to,fail_silently=False,html_message=htmlmsg) #here htmlmsg is a html message which override message
-        send_mail(subject,message,from_email,to,fail_silently=False)
+        send_mail(subject,message,from_email,to,fail_silently=False,html_message=message)
 
         html="<i class='fa fa-check'></i>" + ' Invited ' + '<i class="fa fa-smile-o" aria-hidden="true"></i>'
         return HttpResponse(html)
