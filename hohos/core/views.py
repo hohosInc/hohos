@@ -486,7 +486,7 @@ Because its fun to see various versions of same expression from different people
 Waiting for your amazing styles! \n 
 www.hohos.tech''' + "\n\nYour friend "+ request.user.username + " at www.hohos.tech"+request.user.username       
     
-    message = '<a href="www.hohos.tech">okay brow</a>'
+    # message = '<a href="www.hohos.tech">okay brow</a>'
     if '@' in to_email and '.' in to_email:
         from_email = django_settings.EMAIL_HOST_USER
         

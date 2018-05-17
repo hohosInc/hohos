@@ -18,10 +18,10 @@ if os.environ.get('SECRET_KEY'):
 # SECURITY WARNING: don't run with debug turned on in production!
   
 # when this is false production settings will be used, if its true local settings will be used
-DEBUG = False # if you set it False then the allowed host must be saved to som port like 4 7 etc or just set it to all like ['*']
+DEBUG = True # if you set it False then the allowed host must be saved to som port like 4 7 etc or just set it to all like ['*']
 
 #ALLOWED_HOSTS = ['139.59.22.43']
-ALLOWED_HOSTS = ['139.59.77.182','.hohos.tech','hohos.tech','www.hohos.tech','www.tmall.com']   #'139.59.22.43','hohos.in'
+ALLOWED_HOSTS = ['139.59.77.182:8000','139.59.77.182','.hohos.tech','hohos.tech','www.hohos.tech','www.tmall.com']   #'139.59.22.43','hohos.in'
 
     
 ADMINS = (   

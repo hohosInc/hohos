@@ -124,8 +124,8 @@ def signup_human(request):
               except: 
                 pass
 
-            print('inside signup, authentication.views')
-            print('user\'s pk %d'%(user.pk))
+            # print('inside signup, authentication.views')
+            # print('user\'s pk %d'%(user.pk))
             return redirect('feeds')
 
     else:   
