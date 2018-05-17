@@ -474,16 +474,16 @@ def invite(request):
         message = '''Hey there!\n
 Your friend at hohos has challenged you to copy their Styles and Facial Expressions. 
 Come and show your own version of these styles and Facial Expressions. 
-Because its fun to see various versions of same expression from different people\n
-Waiting for your amazing styles! \n 
+Because its fun to see various versions of same expression from different people.\n\n
+Waiting for your amazing styles at
 <a href="http://www.hohos.tech/">hohos</a>''' 
     else:
         message = '''Hey there!\n
 Your friend at hohos has challenged you to copy their Styles and Expressions.\n 
 So you are welcome at hohos.\n 
 Come and show your own version of various Expressions shared by other users.\n 
-Because its fun to see various versions of same expression from different people\n 
-Waiting for your amazing styles! \n 
+Because its fun to see various versions of same expression from different people.\n\n 
+Waiting for your amazing styles at
 <a href="http://www.hohos.tech/">hohos</a>''' + "\n\nYour friend "+ request.user.username + " at <a href='http://www.hohos.tech/'>hohos</a>"+request.user.username       
     
     # message = '<a href="www.hohos.tech">okay brow</a>'
