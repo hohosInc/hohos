@@ -471,20 +471,20 @@ def invite(request):
     to = [to_email]
     subject = 'challenge at hohos'
     if not request.user.is_authenticated:
-        message = '''Hey there!\n
+        message = '''Hey there!<br>
 Your friend at hohos has challenged you to copy their Styles and Facial Expressions. 
 Come and show your own version of these styles and Facial Expressions. 
-Because its fun to see various versions of same expression from different people.\n\n
+Because its fun to see various versions of same expression from different people.<br><br>
 Waiting for your amazing styles at
 <a href="http://www.hohos.tech/">hohos</a>''' 
     else:
-        message = '''Hey there!\n
-Your friend at hohos has challenged you to copy their Styles and Expressions.\n 
-So you are welcome at hohos.\n 
-Come and show your own version of various Expressions shared by other users.\n 
-Because its fun to see various versions of same expression from different people.\n\n 
+        message = '''Hey there!<br>
+Your friend at hohos has challenged you to copy their Styles and Expressions.<br> 
+So you are welcome at hohos.<br> 
+Come and show your own version of various Expressions shared by other users.<br> 
+Because its fun to see various versions of same expression from different people.<br><br> 
 Waiting for your amazing styles at
-<a href="http://www.hohos.tech/">hohos</a>''' + "\n\nYour friend "+ request.user.username + " at <a href='http://www.hohos.tech/'>hohos</a>"+request.user.username       
+<a href="http://www.hohos.tech/">hohos</a>''' + "<br><br>Your friend "+ request.user.username + " at <a href='http://www.hohos.tech/'>hohos</a>"+request.user.username       
     
     message = '<a href="www.hohos.tech">okay brow</a>'
     if '@' in to_email and '.' in to_email:
