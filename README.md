@@ -5,11 +5,14 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![MIT License](https://img.shields.io/github/license/dawnlabs/carbon.svg)](https://github.com/dbads/hohos/blob/master/LICENSE)
 [![Join the chat at https://gitter.im/dbads/hohos](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hohosguys/Lobby)<br>
-<br></br>
+
+<a href="https://www.buymeacoffee.com/dbads" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+<br>
 
 Visit hohos - [hohos.tech](http://hohos.tech)
 
-
+<br>
 
 <h3>How to run hohos locally ?</h3><hr>
       
