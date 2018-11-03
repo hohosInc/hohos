@@ -515,6 +515,7 @@ def post(request):   #feeds on profiles
         html = ''
     return HttpResponse(html)
 
+# +'<br><br>And awesome OpenChat at <a href="www.hohos.tech/feeds/openchat/h_h/'+\
 
 @login_required(login_url='/login/')
 @ajax_required 
@@ -535,14 +536,14 @@ def email_on_post(request):                   # feeds on profiles and reponse an
             to_email=to_user.email
             to = [to_email]
             common_message = '<br>-------------------------------------------------------------------------<br>'+\
-                        '<br><br>For more you can always check your profile at - <a href="www.hohos.tech">hohos</a>'+\
-                         to_user.username +\
-                        '<br><br>Besides there are some new challenges and responses <a href="www.hohos.tech/feeds/">Responses</a>" which may attract you. - '\
-                        # +'<br><br>And awesome OpenChat at <a href="www.hohos.tech/feeds/openchat/h_h/'+\
-                        +'<br><br>TeamiA at <a href="www.hohos.tech">hohos</a>'+\
+                        '<br><br>For more you can always check your profile at - <a href="www.hohos.tech/'+to_user.username+'">'+to_user.username+'</a>'+\
+                        '<br><br>Besides there are some new <a href="www.hohos.tech/feeds/">challenges and responses </a>which may attract you - '+\
+                        '<br><br>TeamiA at <a href="www.hohos.tech">hohos</a>'+\
                         '<br><br>In case you do not have access to your account You can always mail us at <a href="mailto:hohosguys@gmail.com">hohosguys</a>'+\
                         '<br><br><br><br>This is a system generated E-mail, Login at hohos and go to Settings For managing E-mails you get from us.' 
             if mail_type == 'challenge_mail':
+                # challenge_feed = Feed.objects.all().filter(user=request.user, to_user=to_user,)
+                # challenge_pic_url = 
                 subject = user.profile.get_screen_name() + ' has challenged you ' #+ to_user.profile.get_screen_name()
                 message = user.profile.get_screen_name() + ' has challenged you with following caption - <br><br>'\
                         + post + '<br>See all challenges for you at <a href="www.hohos.tech/challenges/for/'+ to_user.username +'">Challenges for you</a>' + common_message
@@ -560,7 +561,7 @@ def email_on_post(request):                   # feeds on profiles and reponse an
                     message_2 = user.profile.get_screen_name() + ' has responded to a challengewhich was originally made for you  - <br><br>'\
                         + post + '<br>See the whole story at <a href="www.hohos.tech/feeds/response/'+ response_for_id +'">Responses</a>'+common_message
                     try:
-                        send_mail(subject_2, message_2, from_email, to_2, fail_silently=False,html_message=message_2)        
+                        send_mail(subject_2,message_2,from_email, to_2,fail_silently=False,html_message=message_2)        
                     except:
                         pass
                         
